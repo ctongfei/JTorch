@@ -1,6 +1,4 @@
-### JavaTorch
-
-Java binding of Torch through Swig
+### JavaTorch: Java binding of Torch through Swig
 
 The latest C source of Torch (PyTorch C core) should be accessed from [here](https://github.com/pytorch/pytorch/tree/master/torch/lib). 
 
@@ -12,6 +10,12 @@ The latest C source of Torch (PyTorch C core) should be accessed from [here](htt
 | `THC     `| Torch GPU                   | `torch.thc         `|
 | `THCUNN  `| Torch GPU neural networks   | `torch.thcunn      `|
 | `THCS    `| Torch sparse tensors on GPU | `torch.thcs        `|
+
+#### Prerequisites
+ - Clang (Mac) / GCC (Linux)
+ - JVM
+ - CUDA
+ - Swig
 
 #### Building
 
