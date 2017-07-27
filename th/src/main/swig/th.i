@@ -4,4 +4,4 @@
     #include "include/TH/TH.h"
 %}
 
-%include "include/TH-preprocessed.h"
+%include "preprocessed/TH.h"

@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 TH=include/TH
-THStripped=THStripped
+THStripped=stripped/TH
 
 echo "Create a copy of the source files"
 
@@ -14,12 +16,13 @@ done
 cd ../..
 
 echo "Expand macros and includes in C source"
-gcc -E $THStripped/TH.h > TH-preprocessed.h
+mkdir preprocessed
+gcc -E $THStripped/TH.h > preprocessed/TH.h
 
 echo "Generate SWIG bindings"
 mkdir torch
 mkdir torch/th
-swig -java -package torch.th -outdir torch/th th.i
+swig -java -package torch.swig.th -outdir torch/th th.i
 
 echo "Compile JNI wrapper module"
 gcc -c th_wrap.c -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin"
@@ -33,4 +36,4 @@ gcc -dynamiclib -undefined suppress -flat_namespace th_wrap.o -o libjnith.dylib
 echo "Builds Java wrapper library"
 javac torch/th/*.java
 touch Manifest.txt
-jar cfvm torch.th.jar Manifest.txt torch/th/*.class
+jar cfvm torch-th.jar Manifest.txt torch/th/*.class
