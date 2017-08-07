@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="thnn" external.linked.project.path="$MODULE_DIR$/../../thnn" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/../../thnn/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../../thnn/target/test-classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../thnn">
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/src/main/scala" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/target/src_managed/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/src/test/scala" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/target/src_managed/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/target/resource_managed/main" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../thnn/target/resource_managed/test" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../../thnn/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
