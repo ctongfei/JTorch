@@ -1,4 +1,4 @@
-### JavaTorch: Java binding of Torch through Swig
+### JTorch: Java bindings of Torch through Swig
 
 The latest C source of Torch (PyTorch C core) should be accessed from [here](https://github.com/pytorch/pytorch/tree/master/torch/lib). 
 
@@ -34,7 +34,7 @@ cp -R pytorch/torch/lib/tmp_install/* target/
 
 mkdir target/include/cpu
 cp -R target/include/TH/* target/include/cpu
-cp -R target/include/THNN/* target/include/cpu
+cp -R target/include/THNN/* target/include/cpu
 cp -R target/include/THS/* target/include/cpu
 
 # Removes system headers
