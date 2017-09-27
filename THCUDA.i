@@ -1,12 +1,13 @@
-%module TH
+%module THCUDA
 
 %{
     #include <math.h>
     #include <stdbool.h>
     #include <stddef.h>
-    #include "target/cpp/TH/TH.h"
-    #include "target/cpp/THS/THS.h"
-    #include "target/cpp/THNN/THNN.h"
+    #include "target/include/TH/TH.h"
+    #include "target/include/THC/THC.h"
+    #include "target/include/THCS/THCS.h"
+    #include "target/include/THCUNN/THCUNN.h"
 %}
 
 %include "stdint.i"
@@ -21,6 +22,6 @@ intptr_t
 %array_functions(float, floatArray);
 %array_functions(double, doubleArray);
 
-%include "target/preprocessed/TH.h"
-%include "target/preprocessed/THS.h"
-%include "target/preprocessed/THNN.h"
+%include "target/preprocessed/THC.h"
+%include "target/preprocessed/THCS.h"
+%include "target/preprocessed/THCUNN.h"
