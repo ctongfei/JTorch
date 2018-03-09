@@ -1,3 +1,27 @@
+/*
+ * Class NativeUtils is published under the The MIT License:
+ *
+ * Copyright (c) 2012 Adam Heinrich <adam@adamh.cz>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package jtorch.jniutils;
 
 import java.io.*;
@@ -6,6 +30,9 @@ import java.nio.file.*;
 
 /**
  * Utility to load a binary library file inside a jar's resource directory.
+ *
+ * Modified and adapted from <a href=https://github.com/adamheinrich/native-utils>native-utils</a>.
+ * @author Adam Heinrich
  * @author Tongfei Chen
  */
 public class JNILoader {
@@ -32,7 +59,6 @@ public class JNILoader {
             throw new UnsupportedOperationException("Library " + libraryName + " not found.");
         else return url;
     }
-
 
     static File createTempDir() {
         File f = new File(tmpDir + "/" + JNILIBS);
