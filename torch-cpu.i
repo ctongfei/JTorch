@@ -23,3 +23,9 @@ intptr_t
 %array_functions(double, doubleArray);
 
 %include "include-swig/torch-cpu-preprocessed.h"
+
+%typemap(javabody) THJNI %{
+
+
+
+%}
