@@ -6,11 +6,6 @@
 | CPU  |         |       |   ✓   |
 | CUDA |         |       |   ✓   |
 
-
-```sh
-java -Djava.library.path=/usr/local/lib ...
-```
-
 ### Installation
 
 **Step 1: Build ATen binary.** 
