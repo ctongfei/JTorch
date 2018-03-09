@@ -12,13 +12,12 @@ for m in ${TORCH_MODULES[@]}; do
 done
 
 
-echo "Preprocessing all header files and reduce generated code size..."
+echo "Preprocessing all header files for SWIG..."
 #   change '#include <THxxx.h>' to '#include "THxxx.h"'
 #   remove system headers
 #   remove CUDA headers
 #   remove TH_NO_RETURN
 #   remove '__thalign__([0-9])'
-
 cd include
 for f in $(find . -name \*.h); do        
     cat $f \
@@ -40,7 +39,6 @@ cd ..
 
 echo "Generating SWIG bindings..."
 mkdir -p cpu/src/main/java/jtorch/cpu
-
 swig -java -package jtorch.cpu -outdir cpu/src/main/java/jtorch/cpu torch-cpu.i
 
 echo "Compiling SWIG generated JNI wrapper code..."

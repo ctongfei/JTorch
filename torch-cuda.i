@@ -24,3 +24,18 @@ intptr_t
 %array_functions(double, doubleArray);
 
 %include "include-swig/torch-cuda-preprocessed.h"
+
+%pragma(java) jniclasscode=%{
+
+    static {
+        try {
+            System.loadLibrary("aten");
+            jtorch.jniutils.JNILoader.loadLibraryFromJar("jnitorchcuda");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+%}

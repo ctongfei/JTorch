@@ -46,5 +46,5 @@ lazy val cpu = (project in file("cpu")).settings(commonSettings: _*).dependsOn(j
 )
 
 lazy val cuda = (project in file("cuda")).settings(commonSettings: _*).dependsOn(cpu).settings(
-  name := "jtorch.cuda"
+  name := "jtorch-cuda"
 )
