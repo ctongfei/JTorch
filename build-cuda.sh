@@ -55,4 +55,4 @@ cc -c torch-cuda_wrap.c \
 
 echo "Builds dynamic linking library..."
 mkdir -p cuda/src/main/resources
-cc -dynamiclib -undefined suppress -flat_namespace torch-cuda_wrap.o -o libjnitorchcuda.dylib
+cc -dynamiclib -undefined suppress -flat_namespace torch-cuda_wrap.o -o cuda/src/main/resources/libjnitorchcuda.dylib
