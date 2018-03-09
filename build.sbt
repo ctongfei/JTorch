@@ -37,7 +37,11 @@ lazy val commonSettings = Seq(
       </developers>
 )
 
-lazy val cpu = (project in file("cpu")).settings(commonSettings: _*).settings(
+lazy val jniutils = (project in file("jniutils")).settings(commonSettings: _*).settings(
+  name := "jtorch-jniutils"
+)
+
+lazy val cpu = (project in file("cpu")).settings(commonSettings: _*).dependsOn(jniutils).settings(
   name := "jtorch-cpu"
 )
 

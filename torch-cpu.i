@@ -24,8 +24,17 @@ intptr_t
 
 %include "include-swig/torch-cpu-preprocessed.h"
 
-%typemap(javabody) THJNI %{
+%pragma(java) jniclasscode=%{
 
-
+    static {
+        try {
+            System.loadLibrary("aten");
+            jtorch.jniutils.JNILoader.loadLibraryFromJar("jnitorchcpu");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
 
 %}
