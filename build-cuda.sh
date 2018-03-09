@@ -1,11 +1,13 @@
-TORCH_MODULES=(THC THCUNN THCS)
+#! /bin/bash
+
+TORCH_CUDA_MODULES=(THC THCUNN THCS)
 
 mkdir include
 mkdir include-swig
 
 # Copy include files
 
-for m in $TORCH_MODULES; do 
+for m in ${TORCH_CUDA_MODULES[@]}; do 
     cp -R /usr/local/include/$m ./include/$m; 
     cp -R /usr/local/include/$m ./include-swig/$m;
 done
