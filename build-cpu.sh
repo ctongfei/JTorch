@@ -3,14 +3,14 @@ TORCH_MODULES=(TH THNN THS)
 mkdir -p include
 mkdir -p include-swig
 
-# Copy include files
-
+echo "Copy include files..."
 for m in $TORCH_MODULES; do 
     cp -R /usr/local/include/$m ./include/$m; 
     cp -R /usr/local/include/$m ./include-swig/$m;
 done
 
-# preprocess all header files, reduce generated code size.
+
+echo "Preprocess all header files and reduce generated code size..."
 #   0. change '#include <THxxx.h>' to '#include "THxxx.h"'
 #   1. remove system headers
 #   2. remove CUDA headers
@@ -22,19 +22,21 @@ for f in $(find . -name \*.h); do
 done
 cd ..
 
+echo "Preprocess C header..."
 cd include-swig
 cc -P -E -I TH -I THNN -I THS torch-cpu.h > torch-cpu-preprocessed.h
 cd ..
 
 
-# Generates Swig bindings
-mkdir -p src/main/java/jtorch/cpu
+echo "Generate SWIG bindings..."
+mkdir -p cpu/src/main/java/jtorch/cpu
 
 # remove ((noreturn)), __signed
 
-swig -java -package jtorch.cpu -outdir src/main/java/jtorch/cpu torch-cpu.i
+swig -java -package jtorch.cpu -outdir cpu/src/main/java/jtorch/cpu torch-cpu.i
 
-# Compile SWIG generated JNI wrapper code
+
+echo "Compile SWIG generated JNI wrapper code..."
 
 cc -c torch-cpu_wrap.c \
     -I $JAVA_HOME/include \
@@ -43,8 +45,6 @@ cc -c torch-cpu_wrap.c \
     -I /usr/local/include/THNN \
     -I /usr/local/include/THS
 
-# Builds dynamic linking library
+echo "Builds dynamic linking library..."
 cc -dynamiclib -undefined suppress -flat_namespace torch-cpu_wrap.o -o libjnitorchcpu.dylib
 
-# Builds jar
-mvn clean compile assembly:single

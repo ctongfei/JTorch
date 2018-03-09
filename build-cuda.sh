@@ -22,17 +22,18 @@ for f in $(find . -name \*.h); do
 done
 cd ..
 
+cp torch-cuda.h include-swig
 cd include-swig
 cc -P -E -I TH -I THC -I THCUNN -I THCS torch-cuda.h > torch-cuda-preprocessed.h
 cd ..
 
 
 # Generates Swig bindings
-mkdir -p src/main/java/jtorch/cuda
+mkdir -p cuda/src/main/java/jtorch/cuda
 
 # remove ((noreturn)), __signed
 
-swig -java -package jtorch.cuda -outdir src/main/java/jtorch/cuda torch-cuda.i
+swig -java -package jtorch.cuda -outdir cuda/src/main/java/jtorch/cuda torch-cuda.i
 
 # Compile SWIG generated JNI wrapper code
 
@@ -48,5 +49,3 @@ cc -c torch-cuda_wrap.c \
 # Builds dynamic linking library
 cc -dynamiclib -undefined suppress -flat_namespace torch-cuda_wrap.o -o libjnitorchcuda.dylib
 
-# Builds jar
-mvn clean compile assembly:single
