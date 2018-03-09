@@ -56,3 +56,6 @@ cc -c torch-cuda_wrap.c \
 echo "Builds dynamic linking library..."
 mkdir -p cuda/src/main/resources
 cc -dynamiclib -undefined suppress -flat_namespace torch-cuda_wrap.o -o cuda/src/main/resources/libjnitorchcuda.dylib
+
+echo "Publishing to local Ivy repository..."
+sbt cuda/publishLocal

@@ -3,7 +3,7 @@ package jtorch.cpu;
 /**
  * @author Tongfei Chen
  */
-public class TorchTest {
+public class THTest {
 
     public static void main(String[] args) throws Exception {
 

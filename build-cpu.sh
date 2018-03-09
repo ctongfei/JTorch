@@ -53,3 +53,6 @@ cc -c torch-cpu_wrap.c \
 echo "Building dynamic linking library..."
 mkdir -p cpu/src/main/resources
 cc -dynamiclib -undefined suppress -flat_namespace torch-cpu_wrap.o -o cpu/src/main/resources/libjnitorchcpu.dylib
+
+echo "Publishing to local Ivy repository..."
+sbt jniutils/publishLocal cpu/publishLocal
