@@ -1,6 +1,12 @@
 ## JTorch
 JVM bindings for Torch (PyTorch C Core)
 
+
+|      | Windows | Linux | MacOS |
+|:----:|:-------:|:-----:|:-----:|
+| CPU  |         |       |   ✓   |
+| CUDA |         |       |   ✓   |
+
 ### Usage
 
 ```sh
