@@ -3,8 +3,8 @@
 
 |      | Windows | Linux | MacOS |
 |:----:|:-------:|:-----:|:-----:|
-| CPU  |         |       |   ✓   |
-| CUDA |         |       |   ✓   |
+| CPU  |         |   ✓   |   ✓   |
+| CUDA |         |   ✓   |   ✓   |
 
 ### Installation
 
@@ -23,9 +23,12 @@ You should get `libATen.dylib` at `/usr/local/lib` and also C/C++ include files 
 
 **Step 2: Build SWIG bindings and publish to local Ivy repository.**
 ```sh
-./build-cpu.sh
-./build-cuda.sh  # If you want CUDA support
+./build-{mac/linux}-cpu.sh
+./build-{mac/linux}-cuda.sh  # If you want CUDA support
 ```
+You probably need to modify something in the script to make it work.
+
+**[TODO]** Will be refactored into a `Makefile`.
 
 **Step 3: Use!**
 ```xml
