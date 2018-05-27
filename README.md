@@ -1,5 +1,6 @@
 ## JTorch: JVM bindings for Torch (PyTorch C/C++ core)
 
+🚧 **Ongoing project** 🚧 **Status: Not ready for use** 🚧
 
 |      | Windows | Linux | MacOS |
 |:----:|:-------:|:-----:|:-----:|
