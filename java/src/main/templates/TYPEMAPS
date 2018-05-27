@@ -1,0 +1,8 @@
+Float:float:Float:CFloatArray
+Double:double:Double:CDoubleArray
+
+UByte:short:Byte:CUInt8Array
+Byte:byte:Char:CInt8Array
+Short:short:Short:CInt16Array
+Int:int:Int:CInt32Array
+Long:long:Long:CInt64Array

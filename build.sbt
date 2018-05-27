@@ -1,7 +1,7 @@
 lazy val commonSettings = Seq(
   organization := "me.tongfei",
   isSnapshot := true,
-  version := "0.3.0-SNAPSHOT",
+  version := "0.4.0-SNAPSHOT",
   
   crossPaths := false,  // pure Java library
   autoScalaLibrary := false, // pure Java library
@@ -41,10 +41,10 @@ lazy val jniutils = (project in file("jniutils")).settings(commonSettings: _*).s
   name := "jtorch-jniutils"
 )
 
-lazy val cpu = (project in file("cpu")).settings(commonSettings: _*).dependsOn(jniutils).settings(
-  name := "jtorch-cpu"
+lazy val jni = (project in file("jni")).settings(commonSettings: _*).dependsOn(jniutils).settings(
+  name := "jtorch-jni"
 )
 
-lazy val cuda = (project in file("cuda")).settings(commonSettings: _*).dependsOn(cpu).settings(
-  name := "jtorch-cuda"
+lazy val java = (project in file("java")).settings(commonSettings: _*).dependsOn(jni).settings(
+  name := "jtorch-java"
 )
