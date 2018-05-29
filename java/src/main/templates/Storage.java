@@ -6,7 +6,7 @@ import jtorch.jni.*;
  * Java proxy class for the TH*Storage types.
  * @author Tongfei Chen
  */
-public class JStorage extends THStorage implements WithFlag {
+public class JStorage extends THStorage implements WithFlag, AutoCloseable {
 
     public JStorage() {
         this(TH.THStorage_(new)());
@@ -135,13 +135,17 @@ public class JStorage extends THStorage implements WithFlag {
         TH.THStorage_(fill)(this, value);
     }
 
+    public void close() {
+        free();
+    }
+
     /**
      * Creates a storage object from a Java array.
      * @implNote Data is copied once.
      * @apiNote Not in Torch.
      */
     public static JStorage fromJava(JType[] data) {
-        CArray a = new CArray();
+        CArray a = new CArray(data.length);
         for (int i = 0; i < data.length; i++)
             a.setitem(i, data[i]);
         return newWithData(a, data.length);

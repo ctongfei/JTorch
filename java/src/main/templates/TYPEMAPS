@@ -1,8 +1,8 @@
-Float:float:Float:CFloatArray
-Double:double:Double:CDoubleArray
+Float:float:Float:CFloatArray:TH_REAL_IS_FLOAT
+Double:double:Double:CDoubleArray:TH_REAL_IS_DOUBLE
 
-UByte:short:Byte:CUInt8Array
-Byte:byte:Char:CInt8Array
-Short:short:Short:CInt16Array
-Int:int:Int:CInt32Array
-Long:long:Long:CInt64Array
+UByte:short:Byte:CUInt8Array:TH_REAL_IS_BYTE
+Byte:byte:Char:CInt8Array:TH_REAL_IS_CHAR
+Short:short:Short:CInt16Array:TH_REAL_IS_SHORT
+Int:int:Int:CInt32Array:TH_REAL_IS_INT
+Long:long:Long:CInt64Array:TH_REAL_IS_LONG

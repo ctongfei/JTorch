@@ -1,5 +1,6 @@
 #! /bin/bash
 
+PYTORCH_SOURCE_PATH=/Users/tongfei/my/proj/py/pytorch/aten/src
 PYTORCH_INCLUDE_PATH=/Users/tongfei/my/proj/py/pytorch/torch/lib/tmp_install/include
 PYTORCH_DYLIB_PATH=/usr/local/lib/python3.6/site-packages/torch/lib
 
@@ -12,10 +13,15 @@ echo "Copying include files..."
 for m in ${TORCH_MODULES[@]}; do 
     cp -R $PYTORCH_INCLUDE_PATH/$m ./include/$m; 
     cp -R $PYTORCH_INCLUDE_PATH/$m ./include-swig/$m;
+
+    # Files missing in the original C FFI
+    # cp $PYTORCH_SOURCE_PATH/TH/THGenerator.h ./include/TH/THGenerator.h
+    # cp $PYTORCH_SOURCE_PATH/TH/THGenerator.h ./include-swig/TH/THGenerator.h
+    
 done
 
 
-echo "Preprocessing all header files for SWIG..."
+echo "Preprocessing all header files for SWIG to parse..."
 #   change '#include <THxxx.h>' to '#include "THxxx.h"'
 #   remove system headers
 #   remove CUDA headers
@@ -43,6 +49,8 @@ cc -P -E \
   | grep -v "struct THCState;" \
   | grep -v "typedef struct THCState THCState;" \
   > torch-preprocessed.h
+#  | grep -v "typedef struct THGeneratorState THGeneratorState;" \
+#  | grep -v "typedef struct THGenerator THGenerator;" \
 cd ..
 
 
@@ -67,5 +75,5 @@ echo "Building dynamic linking library..."
 mkdir -p jni/src/main/resources
 cc -dynamiclib -undefined suppress -flat_namespace torch_wrap.o -o jni/src/main/resources/libjnitorch.dylib
 
-echo "Publishing to local Ivy repository..."
-# sbt jniutils/publishLocal core/publishLocal
+# echo "Publishing to local Ivy repository..."
+# sbt jniutils/publishLocal jni/publishLocal java/publishLocal

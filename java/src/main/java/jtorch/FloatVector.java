@@ -8,6 +8,9 @@ import jtorch.jni.*;
  */
 public class FloatVector {
 
+    ////////////////
+    // THVector.h //
+    ////////////////
     /** x[i] <- c (length n). */
     public static void fill(CFloatArray x, float c, long n) {
         TH.THFloatVector_fill(x.cast(), c, n);
@@ -54,22 +57,9 @@ public class FloatVector {
     }
 
     /** data[i] <~ Normal(mean, stddev) (length n). */
-    //TODO: wrapper for THGenerator
-    public static void normal_fill(CFloatArray data, long size, SWIGTYPE_p_THGenerator generator, float mean, float stddev) {
+    public static void normal_fill(CFloatArray data, long size, Generator generator, float mean, float stddev) {
         TH.THFloatVector_normal_fill(data.cast(), size, generator, mean, stddev);
     }
-
-#if defined(TH_REAL_IS_SHORT) || defined(TH_REAL_IS_INT) || defined(TH_REAL_IS_LONG)
-
-    /** y[i] = abs(x[i]) (length n). */
-    public static void abs(CFloatArray y, CFloatArray x, long n) {
-        TH.THFloatVector_abs(y.cast(), x.cast(), n);
-    }
-
-#endif
-
-#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
-
     /** y[i] = log(x[i]) (length n). */
     public static void log(CFloatArray y, CFloatArray x, long n) {
         TH.THFloatVector_log(y.cast(), x.cast(), n);
@@ -122,7 +112,7 @@ public class FloatVector {
 
     /** y[i] = erf(x[i]) (length n). */
     public static void erf(CFloatArray y, CFloatArray x, long n) {
-        TH.THFloatVector_erfinv(y.cast(), x.cast(), n);
+        TH.THFloatVector_erf(y.cast(), x.cast(), n);
     }
 
     /** y[i] = erfinv(x[i]) (length n). */
@@ -171,7 +161,7 @@ public class FloatVector {
     }
 
     /** y[i] = pow(x[i], c) (length n). */
-    public static void log(CFloatArray y, CFloatArray x, float c, long n) {
+    public static void pow(CFloatArray y, CFloatArray x, float c, long n) {
         TH.THFloatVector_pow(y.cast(), x.cast(), c, n);
     }
 
@@ -219,4 +209,8 @@ public class FloatVector {
     public static void cinv(CFloatArray y, CFloatArray x, long n) {
         TH.THFloatVector_cinv(y.cast(), x.cast(), n);
     }
+
+
+
 }
+

@@ -3,6 +3,7 @@ package jtorch;
 import jtorch.jni.*;
 
 /**
+ * Proxy class for the Torch THHalf type.
  * @author Tongfei Chen
  */
 public class Half extends __THHalf {
