@@ -3,7 +3,7 @@ package jtorch;
 import jtorch.jni.*;
 
 /**
- * Proxy object that wraps around the THTensor C type.
+ * Proxy object that wraps around the TH*Tensor C type.
  * @author Tongfei Chen
  */
 public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
@@ -73,25 +73,28 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
         TH.THFloatTensor_clearFlag(this, flag);
     }
 
-    /** Creates a  */
+    /** Creates a shallow copy (pointer copy) of the given tensor. */
     public static FloatTensor newWithTensor(FloatTensor tensor) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithTensor(tensor)
         );
     }
 
+    /** Creates a new tensor from the given storage, offset, sizes and strides. */
     public static FloatTensor newWithStorage(FloatStorage storage, int storageOffset, LongStorage size, LongStorage stride) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithStorage(storage, storageOffset, size, stride)
         );
     }
 
+    /** Creates a 1-D tensor with the given size and stride from the given storage. */
     public static FloatTensor newWithStorage1d(FloatStorage storage, int storageOffset, long size0, long stride0) {
         return new FloatTensor(
-                TH.THFloatTensor_newWithStorage(storage, storageOffset, size0, stride0)
+                TH.THFloatTensor_newWithStorage1d(storage, storageOffset, size0, stride0)
         );
     }
 
+    /** Creates a 2-D tensor with the given sizes and strides from the given storage. */
     public static FloatTensor newWithStorage2d(
             FloatStorage storage, int storageOffset,
             long size0, long stride0,
@@ -102,6 +105,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
         );
     }
 
+    /** Creates a 3-D tensor with the given sizes and strides from the given storage. */
     public static FloatTensor newWithStorage3d(
             FloatStorage storage, int storageOffset,
             long size0, long stride0,
@@ -113,6 +117,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
         );
     }
 
+    /** Creates a 4-D tensor with the given sizes and strides from the given storage. */
     public static FloatTensor newWithStorage4d(
             FloatStorage storage, int storageOffset,
             long size0, long stride0,
@@ -125,36 +130,42 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
         );
     }
 
+    /** Creates a new tensor with the given size and stride array. */
     public static FloatTensor newWithSize(LongStorage size, LongStorage stride) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithSize(size, stride)
         );
     }
 
+    /** Creates a new 1-D tensor with the given size. */
     public static FloatTensor newWithSize1d(long size0) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithSize1d(size0)
         );
     }
 
+    /** Creates a new 2-D tensor with the given sizes. */
     public static FloatTensor newWithSize2d(long size0, long size1) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithSize2d(size0, size1)
         );
     }
 
+    /** Creates a new 3-D tensor with the given sizes. */
     public static FloatTensor newWithSize3d(long size0, long size1, long size2) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithSize3d(size0, size1, size2)
         );
     }
 
+    /** Creates a new 4-D tensor with the given sizes. */
     public static FloatTensor newWithSize4d(long size0, long size1, long size2, long size3) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithSize4d(size0, size1, size2, size3)
         );
     }
 
+    /** Creates a new tensor that is a clone of the given tensor. */
     public static FloatTensor newClone(FloatTensor self) {
         return new FloatTensor(
                 TH.THFloatTensor_newClone(self)
@@ -166,12 +177,14 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
         return FloatTensor.newClone(this);
     }
 
+    /** Creates a memory-contiguous tensor copy of the given tensor. */
     public static FloatTensor newContiguous(FloatTensor self) {
         return new FloatTensor(
                 TH.THFloatTensor_newContiguous(self)
         );
     }
 
+    /** Returns a memory-contiguous copy of this tensor. */
     public FloatTensor contiguous() {
         return newContiguous(this);
     }
@@ -868,6 +881,14 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
         TH.THFloatTensor_eye(r, n, m);
         return r;
     }
+
+    public static FloatTensor arange(AccReal xmin, AccReal xmax, AccReal step) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_arange(xmin, xmas, step);
+        return r;
+    }
+
+    
 
     // aRange
     // range

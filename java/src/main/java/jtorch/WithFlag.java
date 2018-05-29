@@ -9,4 +9,6 @@ public interface WithFlag {
 
     void clearFlag(char flag);
 
+    char getFlag();
+
 }

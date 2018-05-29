@@ -20,77 +20,60 @@ public class JStorage extends THStorage implements WithFlag {
         return THStorage.getCPtr(this);
     }
 
-    /**
-     * Returns the underlying raw pointer wrapped in a SWIG-generated wrapper.
-     */
+    /** Returns the underlying raw pointer wrapped in a SWIG-generated wrapper.*/
     public CArray data() {
         return CArray.frompointer(TH.THStorage_(data)(this));
     }
 
+    /** Returns the size of this storage object. */
     public long size() {
         return TH.THStorage_(size)(this);
     }
 
-    /**
-     * Returns the number of bytes of the element stored in this storage object.
-     */
+    /** Returns the number of bytes of the element stored in this storage object.*/
     public static long elementSize() {
         return TH.THStorage_(elementSize)().longValue();
     }
 
-    /**
-     * Sets a specific value in this storage.
-     */
+    /** Sets a specific value in this storage. */
     public void set(long index, JType value) {
         TH.THStorage_(set)(this, index, value);
     }
 
-    /**
-     * Gets a specific value in this storage.
-     */
+    /** Gets a specific value in this storage. */
     public JType get(long index) {
         return TH.THStorage_(get)(this, index);
     }
 
-    /**
-     * Creates a storage object with the given size.
-     */
+    /** Creates a storage object with the given size. */
     public static JStorage newWithSize(int size) {
         return new JStorage(
                 TH.THStorage_(newWithSize)(size)
         );
     }
 
-    /**
-     * Creates a storage object with size 1, populating it with the given element.
-     */
+    /** Creates a storage object with size 1, populating it with the given element. */
     public static JStorage newWithSize1(JType n0) {
         return new JStorage(
                 TH.THStorage_(newWithSize1)(n0)
         );
     }
 
-    /**
-     * Creates a storage object with size 2, populating it with the given two elements.
-     */
+    /** Creates a storage object with size 2, populating it with the given two elements. */
     public static JStorage newWithSize2(JType n0, JType n1) {
         return new JStorage(
                 TH.THStorage_(newWithSize2)(n0, n1)
         );
     }
 
-    /**
-     * Creates a storage object with size 3, populating it with the given three elements.
-     */
+    /** Creates a storage object with size 3, populating it with the given three elements. */
     public static JStorage newWithSize3(JType n0, JType n1, JType n2) {
         return new JStorage(
                 TH.THStorage_(newWithSize3)(n0, n1, n2)
         );
     }
 
-    /**
-     * Creates a storage object with size 4, populating it with the given four elements.
-     */
+    /** Creates a storage object with size 4, populating it with the given four elements. */
     public static JStorage newWithSize4(JType n0, JType n1, JType n2, JType n3) {
         return new JStorage(
                 TH.THStorage_(newWithSize4)(n0, n1, n2, n3)
@@ -103,9 +86,7 @@ public class JStorage extends THStorage implements WithFlag {
         );
     }
 
-    /**
-     * Creates a new storage object with the given data pointer and size.
-     */
+    /** Creates a new storage object with the given data pointer and size. */
     public static JStorage newWithData(CArray data, long size) {
         return new JStorage(
                 TH.THStorage_(newWithData)(data.cast(), size)
@@ -136,16 +117,12 @@ public class JStorage extends THStorage implements WithFlag {
         TH.THStorage_(retain)(this);
     }
 
-    /**
-     * Swaps the memory allocated by two storage objects.
-     */
+    /** Swaps the memory allocated by two storage objects. */
     public static void swap(JStorage storage1, JStorage storage2) {
         TH.THStorage_(swap)(storage1, storage2);
     }
 
-    /**
-     * Frees the memory allocated with this object.
-     */
+    /** Frees the memory allocated with this object. */
     public void free() {
         TH.THStorage_(free)(this);
     }
@@ -158,7 +135,6 @@ public class JStorage extends THStorage implements WithFlag {
         TH.THStorage_(fill)(this, value);
     }
 
-
     /**
      * Creates a storage object from a Java array.
      * @implNote Data is copied once.
@@ -170,5 +146,6 @@ public class JStorage extends THStorage implements WithFlag {
             a.setitem(i, data[i]);
         return newWithData(a, data.length);
     }
+
 
 }
