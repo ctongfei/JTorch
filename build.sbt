@@ -48,3 +48,10 @@ lazy val jni = (project in file("jni")).settings(commonSettings: _*).dependsOn(j
 lazy val java = (project in file("java")).settings(commonSettings: _*).dependsOn(jni).settings(
   name := "jtorch-java"
 )
+
+lazy val codegen = (project in file("codegen")).settings(commonSettings: _*).settings(
+  name := "jtorch-codegen",
+  crossPaths := true,
+  autoScalaLibrary := true,
+  libraryDependencies += "com.lihaoyi" %% "fastparse" % "1.0.0"
+)

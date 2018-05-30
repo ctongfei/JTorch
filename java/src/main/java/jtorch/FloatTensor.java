@@ -6,7 +6,7 @@ import jtorch.jni.*;
  * Proxy object that wraps around the TH*Tensor C type.
  * @author Tongfei Chen
  */
-public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag {
+public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, AutoCloseable {
 
     /** Creates an empty tensor. */
     public FloatTensor() {

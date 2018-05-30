@@ -5,10 +5,10 @@ import jtorch.jni.*;
 import java.math.BigInteger;
 
 /**
- * Wraps around constants and functions in THMath.h and THLogAdd.h.
+ * Wraps around constants and functions in THMath.h, THLogAdd.h and THSize.h.
  * @author Tongfei Chen
  */
-public class Math {
+public class Torch {
 
     //////////////
     // THMath.h //
@@ -100,5 +100,9 @@ public class Math {
     double expMinusApprox(double x) {
         return TH.THExpMinusApprox(x);
     }
+
+    //////////////
+    // THSize.h //
+    //////////////
 
 }

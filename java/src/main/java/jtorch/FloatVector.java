@@ -1,3 +1,6 @@
+// GENERATED FROM "generate.sh" TO EMULATE C-STYLE TEMPLATES.
+// DO NOT MODIFY.
+
 package jtorch;
 
 import jtorch.jni.*;

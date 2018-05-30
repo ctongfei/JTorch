@@ -31,7 +31,7 @@ import java.nio.file.*;
 /**
  * Utility to load a binary library file inside a jar's resource directory.
  *
- * Modified and adapted from <a href=https://github.com/adamheinrich/native-utils>native-utils</a>.
+ * @implNote Modified and adapted from <a href=https://github.com/adamheinrich/native-utils>native-utils</a>.
  * @author Adam Heinrich
  * @author Tongfei Chen
  */
