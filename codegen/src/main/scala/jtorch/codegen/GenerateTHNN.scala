@@ -52,16 +52,16 @@ object GenerateTHNN extends App {
     
     Function(className, functionName, (floatType: String) =>
       s"""
-        |/**
-        |${arguments.filter(a => a.cType != "THNNState").map(a => s"@param ${a.name} ${a.comment}").mkString("\n")}
-        |*/
-        |public static ${mapToJavaType(resultCType, floatType)} $functionName(${
+        |    /**
+        |${arguments.filter(a => a.cType != "THNNState").map(a => s"     * @param ${a.name} ${a.comment}").mkString("\n")}
+        |     */
+        |    public static ${mapToJavaType(resultCType, floatType)} $functionName(${
         arguments.filter(_.cType != "THNNState").map(a => s"${mapToJavaType(a.cType, floatType)} ${a.name}").mkString(", ")}) {
-        |  TH.THNN_$floatType${className}_$functionName(${arguments.map {a => a.cType match {
+        |        TH.THNN_$floatType${className}_$functionName(${arguments.map {a => a.cType match {
         case "THNNState" => "State.INSTANCE"
         case _ => a.name
       }}.mkString(", ")});
-        |}
+        |    }
       """.stripMargin)
   }
 
