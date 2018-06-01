@@ -1,7 +1,7 @@
 lazy val commonSettings = Seq(
   organization := "me.tongfei",
   isSnapshot := true,
-  version := "0.4.0-SNAPSHOT",
+  version := "0.1-TH0.4-SNAPSHOT",
   
   crossPaths := false,  // pure Java library
   autoScalaLibrary := false, // pure Java library

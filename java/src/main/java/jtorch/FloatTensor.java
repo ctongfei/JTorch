@@ -534,23 +534,23 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return TH.THFloatTensor_dot(that, this);
     }
 
-    public float minAll() {
+    public float minall() {
         return TH.THFloatTensor_minall(this);
     }
 
-    public float maxAll() {
+    public float maxall() {
         return TH.THFloatTensor_maxall(this);
     }
 
-    public float medianAll() {
+    public float medianall() {
         return TH.THFloatTensor_medianall(this);
     }
 
-    public AccReal sumAll() {
+    public AccReal sumall() {
         return TH.THFloatTensor_sumall(this);
     }
 
-    public AccReal prodAll() {
+    public AccReal prodall() {
         return TH.THFloatTensor_prodall(this);
     }
 
@@ -632,120 +632,165 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return r;
     }
 
-    public FloatTensor bitAnd(float value) {
+    public FloatTensor bitand(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_bitand(r, this, value);
         return r;
     }
 
-    public FloatTensor bitOr(float value) {
+    public FloatTensor bitor(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_bitor(r, this, value);
         return r;
     }
 
-    public FloatTensor bitXor(float value) {
+    public FloatTensor bitxor(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_bitxor(r, this, value);
         return r;
     }
 
-    public FloatTensor cAdd(float a, FloatTensor y) {
+    public FloatTensor cadd(float a, FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cadd(z, this, a, y);
         return z;
     }
 
-    public FloatTensor cSub(float a, FloatTensor y) {
+    public FloatTensor csub(float a, FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_csub(z, this, a, y);
         return z;
     }
 
-    public FloatTensor cMul(FloatTensor y) {
+    public FloatTensor cmul(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cmul(z, this, y);
         return z;
     }
 
-    public FloatTensor cPow(FloatTensor y) {
+    public FloatTensor cpow(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cpow(z, this, y);
         return z;
     }
 
-    public FloatTensor cDiv(FloatTensor y) {
+    public FloatTensor cdiv(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cdiv(z, this, y);
         return z;
     }
 
-    public FloatTensor cLshift(FloatTensor y) {
+    public FloatTensor clshift(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_clshift(z, this, y);
         return z;
     }
 
-    public FloatTensor cRshift(FloatTensor y) {
+    public FloatTensor crshift(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_crshift(z, this, y);
         return z;
     }
 
-    public FloatTensor cFmod(FloatTensor y) {
+    public FloatTensor cfmod(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cfmod(z, this, y);
         return z;
     }
 
-    public FloatTensor cRemainder(FloatTensor y) {
+    public FloatTensor cremainder(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cremainder(z, this, y);
         return z;
     }
 
-    public FloatTensor cBitAnd(FloatTensor y) {
+    public FloatTensor cbitand(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cbitand(z, this, y);
         return z;
     }
 
-    public FloatTensor cBitOr(FloatTensor y) {
+    public FloatTensor cbitor(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cbitor(z, this, y);
         return z;
     }
 
-    public FloatTensor cBitXor(FloatTensor y) {
+    public FloatTensor cbitxor(FloatTensor y) {
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_cbitxor(z, this, y);
         return z;
     }
 
-    public FloatTensor addCMul(float a, FloatTensor y, FloatTensor z) {
+    /**
+     * Computes t + a(s1 * s2), where s1 and s2 are element-wise-multiplied.
+     */
+    public static FloatTensor addcmul(FloatTensor t, float a, FloatTensor s1, FloatTensor s2) {
         FloatTensor r = new FloatTensor();
-        TH.THFloatTensor_addcmul(r, this, a, y, z);
+        TH.THFloatTensor_addcmul(r, t, a, s1, s2);
         return r;
     }
 
-    public FloatTensor addCDiv(float a, FloatTensor y, FloatTensor z) {
+    /**
+     * Computes t + a(s1 / s2), where s1 and s2 are element-wise-divided.
+     */
+    public static FloatTensor addcdiv(FloatTensor t, float a, FloatTensor y, FloatTensor z) {
         FloatTensor r = new FloatTensor();
-        TH.THFloatTensor_addcdiv(r, this, a, y, z);
+        TH.THFloatTensor_addcdiv(r, t, a, y, z);
         return r;
     }
 
-    // addMV
-    // addMM
-    // addR
-    // addBMM
-    // bAddBMM
-    // match
+    /** Computes b * t + a * (mat * vec). */
+    public static FloatTensor addmv(float b, FloatTensor t, float a, FloatTensor mat, FloatTensor vec) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_addmv(r, b, t, a, mat, vec);
+        return r;
+    }
+
+    /** Computes b * t + a * (mat1 * mat2). */
+    public static FloatTensor addmm(float b, FloatTensor t, float a, FloatTensor mat1, FloatTensor mat2) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_addmm(r, b, t, a, mat1, mat2);
+        return r;
+    }
+
+    /** Computes b * t + a * (vec1 * vec2^T), where vec1 and vec2 are multiplied to yield the outer product. */
+    public static FloatTensor addr(float b, FloatTensor t, float a, FloatTensor vec1, FloatTensor vec2) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_addr(r, b, t, a, vec1, vec2);
+        return r;
+    }
+
+    /** Computes b * mat + a * ReduceSumOverBatches(bmat1 * bmat2). */
+    public static FloatTensor addbmm(float b, FloatTensor mat, float a, FloatTensor bmat1, FloatTensor bmat2) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_addbmm(r, b, mat, a, bmat1, bmat2);
+        return r;
+    }
+
+    /**
+     * Computes b * t + a * bmm(bmat1, bmat2).
+     * @param t [b, n, p]
+     * @param bmat1 [b, m, n]
+     * @param bmat2 [b, n, p]
+     * @return [b, n, p]
+     */
+    public static FloatTensor baddbmm(float b, FloatTensor t, float a, FloatTensor bmat1, FloatTensor bmat2) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_baddbmm(r, b, t, a, bmat1, bmat2);
+        return r;
+    }
+
+    // TODO: what does this do?
+    public FloatTensor match(FloatTensor that, float gain) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_match(r, this, that, gain);
+        return r;
+    }
 
     public long numel() {
         return TH.THFloatTensor_numel(this);
     }
-
-    // preserveReduceDimSemantics
 
     public ArgOpResult<FloatTensor, LongTensor> max(int dim, boolean keepDim) {
         FloatTensor v = new FloatTensor();
@@ -761,7 +806,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return new ArgOpResult(v, i);
     }
 
-    public ArgOpResult<FloatTensor, LongTensor> kthValue(long k, int dim, boolean keepDim) {
+    public ArgOpResult<FloatTensor, LongTensor> kthvalue(long k, int dim, boolean keepDim) {
         FloatTensor v = new FloatTensor();
         LongTensor i = new LongTensor();
         TH.THFloatTensor_kthvalue(v, i, this, k, dim, keepDim ? 1 : 0);
@@ -794,13 +839,13 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return v;
     }
 
-    public FloatTensor cumSum(int dim) {
+    public FloatTensor cumsum(int dim) {
         FloatTensor v = new FloatTensor();
         TH.THFloatTensor_cumsum(v, this, dim);
         return v;
     }
 
-    public FloatTensor cumProd(int dim) {
+    public FloatTensor cumprod(int dim) {
         FloatTensor v = new FloatTensor();
         TH.THFloatTensor_cumprod(v, this, dim);
         return v;
@@ -822,25 +867,25 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return c;
     }
 
-    public FloatTensor cMax(FloatTensor b) {
+    public FloatTensor cmax(FloatTensor b) {
         FloatTensor c = new FloatTensor();
         TH.THFloatTensor_cmax(c, this, b);
         return c;
     }
 
-    public FloatTensor cMin(FloatTensor b) {
+    public FloatTensor cmin(FloatTensor b) {
         FloatTensor c = new FloatTensor();
         TH.THFloatTensor_cmin(c, this, b);
         return c;
     }
 
-    public FloatTensor cMaxValue(float value) {
+    public FloatTensor cmaxValue(float value) {
         FloatTensor c = new FloatTensor();
         TH.THFloatTensor_cmaxValue(c, this, value);
         return c;
     }
 
-    public FloatTensor cMinValue(float value) {
+    public FloatTensor cminValue(float value) {
         FloatTensor c = new FloatTensor();
         TH.THFloatTensor_cminValue(c, this, value);
         return c;
@@ -850,6 +895,10 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_zeros(z, size);
         return z;
+    }
+
+    public static FloatTensor zeros(long... size) {
+        return zeros(LongStorage.fromJava(size));
     }
 
     public static FloatTensor zerosLike(FloatTensor x) {
@@ -862,6 +911,10 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         FloatTensor z = new FloatTensor();
         TH.THFloatTensor_ones(z, size);
         return z;
+    }
+
+    public static FloatTensor ones(long... size) {
+        return ones(LongStorage.fromJava(size));
     }
 
     public static FloatTensor onesLike(FloatTensor x) {
@@ -884,23 +937,87 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
 
     public static FloatTensor arange(AccReal xmin, AccReal xmax, AccReal step) {
         FloatTensor r = new FloatTensor();
-        TH.THFloatTensor_arange(xmin, xmas, step);
+        TH.THFloatTensor_arange(xmin, xmax, step);
         return r;
     }
 
-    
+    public static FloatTensor range(AccReal xmin, AccReal xmax, AccReal step) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_range(xmin, xmax, step);
+        return r;
+    }
 
-    // aRange
-    // range
-    // randperm
-    // reshape
-    // sort
-    // topk
-    // tril
-    // triu
-    // cat
-    // catArray
-    // equal
+    public static FloatTensor randperm(Generator generator, long n) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_randperm(r, generator, n);
+        return r;
+    }
+
+    public FloatTensor reshape(LongStorage size) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_reshape(r, this, size);
+        return r;
+    }
+
+    public FloatTensor reshape(long... size) {
+        return reshape(LongStorage.fromJava(size));
+    }
+
+    public ArgOpResult<FloatTensor, LongTensor> sort(int dim, boolean descending) {
+        FloatTensor rt = new FloatTensor();
+        LongTensor ri = new LongTensor();
+        TH.THFloatTensor_sort(rt, ri, this, dim, descending ? 1 : 0);
+        return new ArgOpResult(rt, ri);
+    }
+
+    public ArgOpResult<FloatTensor, LongTensor> topk(long k, int dim, boolean largest, boolean sorted) {
+        FloatTensor rt = new FloatTensor();
+        LongTensor ri = new LongTensor();
+        TH.THFloatTensor_topk(rt, ri, this, k, dim, largest ? 1 : 0, sorted ? 1 : 0);
+        return new ArgOpResult(rt, ri);
+    }
+
+    public FloatTensor tril(long k) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_tril(r, this, k);
+        return r;
+    }
+
+    public FloatTensor triu(long k) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_triu(r, this, k);
+        return r;
+    }
+
+    public FloatTensor cat(FloatTensor that, int dim) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_cat(r, this, that, dim);
+        return r;
+    }
+
+    public static FloatTensor catArray(FloatTensor[] inputs, int dim) {
+        FloatTensor r = new FloatTensor();
+        SWIGTYPE_p_p_THFloatTensor xs = TH.new_CFloatTensorArray(inputs.length);
+        for (int i = 0; i < inputs.length; i++)
+            TH.CFloatTensorArray_setitem(xs, i, inputs[i]);
+        TH.THFloatTensor_catArray(r, xs, inputs.length, dim);
+        return r;
+    }
+
+    public boolean equal(FloatTensor that) {
+        return TH.THFloatTensor_equal(this, that) != 0;
+    }
+
+    public boolean equals(Object that) {
+        return (that instanceof THFloatTensor) && equal((FloatTensor) that);
+    }
+
+    public boolean ltValue(float value) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_ltValue(r, this, value);
+        return r;
+    }
+
     // (lt/le/gt/ge/ne/eq)(Value/Tensor)(/T)
     // pow
     // tpow

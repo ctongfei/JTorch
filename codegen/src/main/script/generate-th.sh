@@ -8,7 +8,6 @@ for line in $(cat TYPEMAPS); do
     CARRAYNAME=$(echo $line | cut -d":" -f4)
     FLAG=$(echo $line | cut -d":" -f5)
 
-    printf "[C] TH${THCLASS}Storage\t -> [Java] ${JCLASS}Storage\n"
 
     gcc -P -E -C \
         -D"JStorage=${JCLASS}Storage" \
@@ -16,9 +15,9 @@ for line in $(cat TYPEMAPS); do
         -D"CArray=${CARRAYNAME}" \
         -D"THStorage=TH${THCLASS}Storage" \
         -D"THStorage_(NAME)=TH${THCLASS}Storage_ ## NAME" \
-        Storage.h > ../java/jtorch/${JCLASS}Storage.java
+        Storage.h > ../../../../java/src/main/java/jtorch/${JCLASS}Storage.java
 
-    printf "[C] TH${THCLASS}Vector\t -> [Java] ${JCLASS}Vector\n"
+    echo "${JCLASS}Storage.java generated."
 
     gcc -P -E -C \
         -D"JVector=${JCLASS}Vector" \
@@ -27,8 +26,9 @@ for line in $(cat TYPEMAPS); do
         -D"THVector=TH${THCLASS}Vector" \
         -D"THVector_(NAME)=TH${THCLASS}Vector_ ## NAME" \
         -D"${FLAG}" \
-        Vector.h > ../java/jtorch/${JCLASS}Vector.java
+        Vector.h > ../../../../java/src/main/java/jtorch/${JCLASS}Vector.java
 
+    echo "${JCLASS}Vector.java generated."
 
     # echo "[C] TH${THCLASS}Tensor -> [Java] ${JCLASS}Tensor"
 

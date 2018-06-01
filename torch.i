@@ -28,6 +28,17 @@ intptr_t
 %array_class(float, CFloatArray);
 %array_class(double, CDoubleArray);
 
+%array_functions(THByteTensor *, CUInt8TensorArray);
+%array_functions(THCharTensor *, CInt8TensorArray);
+%array_functions(THShortTensor *, CInt16TensorArray);
+%array_functions(THIntTensor *, CInt32TensorArray);
+%array_functions(THLongTensor *, CInt64TensorArray);
+%array_functions(THHalfTensor *, CHalfTensorArray);
+%array_functions(THFloatTensor *, CFloatTensorArray);
+%array_functions(THDoubleTensor *, CDoubleTensorArray);
+
+
+
 %include "include-swig/torch-preprocessed.h"
 
 %pragma(java) jniclasscode=%{

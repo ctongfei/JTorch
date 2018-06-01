@@ -26,8 +26,8 @@ You probably need to modify something in the script to make it work.
 ```xml
     <dependency>
       <groupId>me.tongfei</groupId>
-      <artifactId>jtorch-core</artifactId>
-      <version>0.4.0</version>
+      <artifactId>jtorch-java</artifactId>
+      <version>0.1-TH0.4-SNAPSHOT</version>
     </dependency>
 ```
 
