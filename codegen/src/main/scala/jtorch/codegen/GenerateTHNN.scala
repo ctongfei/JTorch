@@ -21,6 +21,7 @@ object GenerateTHNN extends App {
     case "THTensor" => s"${floatType}Tensor"
     case "THIndexTensor" => "LongTensor"
     case "THIntegerTensor" => "IntTensor"
+    case "THGenerator" => "Generator"
     case "bool" => "boolean"
     case "int64_t" => "long"
     case "accreal" => "double"

@@ -5,14 +5,15 @@ for line in $(cat TYPEMAPS); do
     JCLASS=$(echo $line | cut -d":" -f1)
     JPRIM=$(echo $line | cut -d":" -f2)
     THCLASS=$(echo $line | cut -d":" -f3)
-    CARRAYNAME=$(echo $line | cut -d":" -f4)
+    CARRAYPREFIX=$(echo $line | cut -d":" -f4)
     FLAG=$(echo $line | cut -d":" -f5)
+    ACCREAL=$(echo $line | cut -d":" -f6)
 
 
     gcc -P -E -C \
         -D"JStorage=${JCLASS}Storage" \
         -D"JType=${JPRIM}" \
-        -D"CArray=${CARRAYNAME}" \
+        -D"CArray=${CARRAYPREFIX}Array" \
         -D"THStorage=TH${THCLASS}Storage" \
         -D"THStorage_(NAME)=TH${THCLASS}Storage_ ## NAME" \
         Storage.h > ../../../../java/src/main/java/jtorch/${JCLASS}Storage.java
@@ -22,7 +23,7 @@ for line in $(cat TYPEMAPS); do
     gcc -P -E -C \
         -D"JVector=${JCLASS}Vector" \
         -D"JType=${JPRIM}" \
-        -D"CArray=${CARRAYNAME}" \
+        -D"CArray=${CARRAYPREFIX}Array" \
         -D"THVector=TH${THCLASS}Vector" \
         -D"THVector_(NAME)=TH${THCLASS}Vector_ ## NAME" \
         -D"${FLAG}" \
@@ -30,6 +31,20 @@ for line in $(cat TYPEMAPS); do
 
     echo "${JCLASS}Vector.java generated."
 
-    # echo "[C] TH${THCLASS}Tensor -> [Java] ${JCLASS}Tensor"
+    gcc -P -E -C \
+        -D"JTensor=${JCLASS}Tensor" \
+        -D"JStorage=${JCLASS}Storage" \
+        -D"JType=${JPRIM}" \
+        -D"CArray=${CARRAYPREFIX}Array" \
+        -D"THTensor=TH${THCLASS}Tensor" \
+        -D"THTensor_(NAME)=TH${THCLASS}Tensor_ ## NAME" \
+        -D"SWIGTYPE_p_p_THTensor=SWIGTYPE_p_p_TH${THCLASS}Tensor" \
+        -D"new_CTensorArray=new_${CARRAYPREFIX}TensorArray" \
+        -D"CTensorArray_setitem=${CARRAYPREFIX}TensorArray_setitem" \
+        -D"AccReal=${ACCREAL}" \
+        -D"${FLAG}" \
+        Tensor.h > ../../../../java/src/main/java/jtorch/${JCLASS}Tensor.java
+
+    echo "${JCLASS}Tensor.java generated."
 
 done

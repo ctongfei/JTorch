@@ -1,3 +1,6 @@
+// GENERATED FROM "generate-th.sh" TO EMULATE C-STYLE TEMPLATES.
+// DO NOT MODIFY.
+
 package jtorch;
 
 import jtorch.jni.*;
@@ -6,7 +9,7 @@ import jtorch.jni.*;
  * Proxy object that wraps around the TH*Tensor C type.
  * @author Tongfei Chen
  */
-public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, AutoCloseable {
+public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, OffHeapMemory {
 
     /** Creates an empty tensor. */
     public FloatTensor() {
@@ -81,14 +84,14 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
     }
 
     /** Creates a new tensor from the given storage, offset, sizes and strides. */
-    public static FloatTensor newWithStorage(FloatStorage storage, int storageOffset, LongStorage size, LongStorage stride) {
+    public static FloatTensor newWithStorage(FloatStorage storage, long storageOffset, LongStorage size, LongStorage stride) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithStorage(storage, storageOffset, size, stride)
         );
     }
 
     /** Creates a 1-D tensor with the given size and stride from the given storage. */
-    public static FloatTensor newWithStorage1d(FloatStorage storage, int storageOffset, long size0, long stride0) {
+    public static FloatTensor newWithStorage1d(FloatStorage storage, long storageOffset, long size0, long stride0) {
         return new FloatTensor(
                 TH.THFloatTensor_newWithStorage1d(storage, storageOffset, size0, stride0)
         );
@@ -96,7 +99,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
 
     /** Creates a 2-D tensor with the given sizes and strides from the given storage. */
     public static FloatTensor newWithStorage2d(
-            FloatStorage storage, int storageOffset,
+            FloatStorage storage, long storageOffset,
             long size0, long stride0,
             long size1, long stride1) {
         return new FloatTensor(
@@ -107,7 +110,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
 
     /** Creates a 3-D tensor with the given sizes and strides from the given storage. */
     public static FloatTensor newWithStorage3d(
-            FloatStorage storage, int storageOffset,
+            FloatStorage storage, long storageOffset,
             long size0, long stride0,
             long size1, long stride1,
             long size2, long stride2) {
@@ -119,7 +122,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
 
     /** Creates a 4-D tensor with the given sizes and strides from the given storage. */
     public static FloatTensor newWithStorage4d(
-            FloatStorage storage, int storageOffset,
+            FloatStorage storage, long storageOffset,
             long size0, long stride0,
             long size1, long stride1,
             long size2, long stride2,
@@ -251,29 +254,29 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         TH.THFloatTensor_set(this, src);
     }
 
-    public void setStorage(FloatStorage storage, int storageOffset, LongStorage size, LongStorage stride) {
+    public void setStorage(FloatStorage storage, long storageOffset, LongStorage size, LongStorage stride) {
         TH.THFloatTensor_setStorage(this, storage, storageOffset, size, stride);
     }
 
-    public void setStorage1d(FloatStorage storage, int storageOffset, long size0, long stride0) {
+    public void setStorage1d(FloatStorage storage, long storageOffset, long size0, long stride0) {
         TH.THFloatTensor_setStorage1d(this, storage, storageOffset, size0, stride0);
     }
 
-    public void setStorage2d(FloatStorage storage, int storageOffset,
+    public void setStorage2d(FloatStorage storage, long storageOffset,
                              long size0, long stride0,
                              long size1, long stride1
-                             ) {
+    ) {
         TH.THFloatTensor_setStorage2d(this, storage, storageOffset,
                 size0, stride0,
                 size1, stride1
         );
     }
 
-    public void setStorage3d(FloatStorage storage, int storageOffset,
+    public void setStorage3d(FloatStorage storage, long storageOffset,
                              long size0, long stride0,
                              long size1, long stride1,
                              long size2, long stride2
-                             ) {
+    ) {
         TH.THFloatTensor_setStorage3d(this, storage, storageOffset,
                 size0, stride0,
                 size1, stride1,
@@ -281,12 +284,12 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         );
     }
 
-    public void setStorage4d(FloatStorage storage, int storageOffset,
+    public void setStorage4d(FloatStorage storage, long storageOffset,
                              long size0, long stride0,
                              long size1, long stride1,
                              long size2, long stride2,
                              long size3, long stride3
-                             ) {
+    ) {
         TH.THFloatTensor_setStorage4d(this, storage, storageOffset,
                 size0, stride0,
                 size1, stride1,
@@ -353,7 +356,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return TH.THFloatTensor_isSize(this, dims) != 0;
     }
 
-    public int nElement() {
+    public long nElement() {
         return TH.THFloatTensor_nElement(this);
     }
 
@@ -451,9 +454,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         TH.THFloatTensor_copyDouble(this, src);
     }
 
-    public void copyHalf(HalfTensor src) {
-        TH.THFloatTensor_copyHalf(this, src);
-    }
+    // TODO: copyHalf
 
     // MATH
     public void fill(float value) {
@@ -494,11 +495,11 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return r;
     }
 
-    public FloatTensor indexAdd(int dim, LongTensor index, FloatTensor src) {
+    public void indexAdd(int dim, LongTensor index, FloatTensor src) {
         TH.THFloatTensor_indexAdd(this, dim, index, src);
     }
 
-    public FloatTensor indexFill(int dim, LongTensor index, float value) {
+    public void indexFill(int dim, LongTensor index, float value) {
         TH.THFloatTensor_indexFill(this, dim, index, value);
     }
 
@@ -530,7 +531,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         TH.THFloatTensor_scatterFill(this, dim, index, value);
     }
 
-    public AccReal dot(FloatTensor that) {
+    public double dot(FloatTensor that) {
         return TH.THFloatTensor_dot(that, this);
     }
 
@@ -546,11 +547,11 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return TH.THFloatTensor_medianall(this);
     }
 
-    public AccReal sumall() {
+    public double sumall() {
         return TH.THFloatTensor_sumall(this);
     }
 
-    public AccReal prodall() {
+    public double prodall() {
         return TH.THFloatTensor_prodall(this);
     }
 
@@ -857,7 +858,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return r;
     }
 
-    public AccReal trace() {
+    public double trace() {
         return TH.THFloatTensor_trace(this);
     }
 
@@ -935,15 +936,15 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return r;
     }
 
-    public static FloatTensor arange(AccReal xmin, AccReal xmax, AccReal step) {
+    public static FloatTensor arange(double xmin, double xmax, double step) {
         FloatTensor r = new FloatTensor();
-        TH.THFloatTensor_arange(xmin, xmax, step);
+        TH.THFloatTensor_arange(r, xmin, xmax, step);
         return r;
     }
 
-    public static FloatTensor range(AccReal xmin, AccReal xmax, AccReal step) {
+    public static FloatTensor range(double xmin, double xmax, double step) {
         FloatTensor r = new FloatTensor();
-        TH.THFloatTensor_range(xmin, xmax, step);
+        TH.THFloatTensor_range(r, xmin, xmax, step);
         return r;
     }
 
@@ -1012,34 +1013,357 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, A
         return (that instanceof THFloatTensor) && equal((FloatTensor) that);
     }
 
-    public boolean ltValue(float value) {
+    public UByteTensor ltValue(float value) {
         UByteTensor r = new UByteTensor();
         TH.THFloatTensor_ltValue(r, this, value);
         return r;
     }
 
+    public UByteTensor leValue(float value) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_leValue(r, this, value);
+        return r;
+    }
+
+    public UByteTensor gtValue(float value) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_gtValue(r, this, value);
+        return r;
+    }
+
+    public UByteTensor geValue(float value) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_geValue(r, this, value);
+        return r;
+    }
+
+    public UByteTensor neValue(float value) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_eqValue(r, this, value);
+        return r;
+    }
+
+    public UByteTensor eqValue(float value) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_eqValue(r, this, value);
+        return r;
+    }
+
+
+    public UByteTensor ltTensor(FloatTensor that) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_ltTensor(r, this, that);
+        return r;
+    }
+
+    public UByteTensor leTensor(FloatTensor that) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_leTensor(r, this, that);
+        return r;
+    }
+
+    public UByteTensor gtTensor(FloatTensor that) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_gtTensor(r, this, that);
+        return r;
+    }
+
+    public UByteTensor geTensor(FloatTensor that) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_geTensor(r, this, that);
+        return r;
+    }
+
+    public UByteTensor neTensor(FloatTensor that) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_eqTensor(r, this, that);
+        return r;
+    }
+
+    public UByteTensor eqTensor(FloatTensor that) {
+        UByteTensor r = new UByteTensor();
+        TH.THFloatTensor_eqTensor(r, this, that);
+        return r;
+    }
+
     // (lt/le/gt/ge/ne/eq)(Value/Tensor)(/T)
-    // pow
-    // tpow
 
-    // abs
+    public FloatTensor pow(float value) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_pow(r, this, value);
+        return r;
+    }
 
-    // sigmoid/log/lgamma/digamma/trigamma/polygamma/log10/log1p/log2
-    // exp/expm1/cos/acos/cosh/sin/asin/sinh/tan/atan/atan2/tanh
-    // erf/erfinv/sqrt/rsqrt/ceil/floor/round/abs/trunc/frac/lerp
-    // mean/std/var/norm/renorm/dist/histc/bhistc
-    // meanall/varall/stdall/normall/linspace/logspace/rand/randn
-    // dirichlet_grad
-    // logicalall/logicalany
+    public static FloatTensor tpow(float value, FloatTensor t) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_tpow(r, value, t);
+        return r;
+    }
+    public FloatTensor sigmoid() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_sigmoid(r, this);
+        return r;
+    }
 
+    public FloatTensor log() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_log(r, this);
+        return r;
+    }
 
+    public FloatTensor lgamma() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_lgamma(r, this);
+        return r;
+    }
+
+    public FloatTensor digamma() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_digamma(r, this);
+        return r;
+    }
+
+    public FloatTensor trigamma() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_trigamma(r, this);
+        return r;
+    }
+
+    public FloatTensor polygamma(long n) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_polygamma(r, n, this);
+        return r;
+    }
+
+    public FloatTensor log10() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_log10(r, this);
+        return r;
+    }
+
+    public FloatTensor log1p() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_log1p(r, this);
+        return r;
+    }
+
+    public FloatTensor log2() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_log2(r, this);
+        return r;
+    }
+
+    public FloatTensor exp() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_exp(r, this);
+        return r;
+    }
+
+    public FloatTensor expm1() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_expm1(r, this);
+        return r;
+    }
+
+    public FloatTensor cos() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_cos(r, this);
+        return r;
+    }
+
+    public FloatTensor acos() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_acos(r, this);
+        return r;
+    }
+
+    public FloatTensor cosh() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_cosh(r, this);
+        return r;
+    }
+
+    public FloatTensor sin() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_sin(r, this);
+        return r;
+    }
+
+    public FloatTensor asin() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_asin(r, this);
+        return r;
+    }
+
+    public FloatTensor sinh() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_sinh(r, this);
+        return r;
+    }
+
+    public FloatTensor tan() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_tan(r, this);
+        return r;
+    }
+
+    public FloatTensor atan() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_atan(r, this);
+        return r;
+    }
+
+    public static FloatTensor atan2(FloatTensor x, FloatTensor y) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_atan2(r, x, y);
+        return r;
+    }
+
+    public FloatTensor tanh() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_tanh(r, this);
+        return r;
+    }
+    public FloatTensor erf() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_erf(r, this);
+        return r;
+    }
+    public FloatTensor erfinv() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_erfinv(r, this);
+        return r;
+    }
+    public FloatTensor sqrt() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_sqrt(r, this);
+        return r;
+    }
+    public FloatTensor rsqrt() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_rsqrt(r, this);
+        return r;
+    }
+    public FloatTensor ceil() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_ceil(r, this);
+        return r;
+    }
+    public FloatTensor floor() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_floor(r, this);
+        return r;
+    }
+    public FloatTensor round() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_round(r, this);
+        return r;
+    }
+    public FloatTensor abs() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_abs(r, this);
+        return r;
+    }
+    public FloatTensor trunc() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_trunc(r, this);
+        return r;
+    }
+    public FloatTensor frac() {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_frac(r, this);
+        return r;
+    }
+    public static FloatTensor lerp(FloatTensor x, FloatTensor y, float w) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_lerp(r, x, y, w);
+        return r;
+    }
+
+    public FloatTensor mean(int dim, boolean keepdim) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_mean(r, this, dim, keepdim ? 1 : 0);
+        return r;
+    }
+    public FloatTensor std(int dim, boolean biased, boolean keepdim) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_std(r, this, dim, biased ? 1 : 0, keepdim ? 1 : 0);
+        return r;
+    }
+
+    public FloatTensor var(int dim, boolean biased, boolean keepdim) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_var(r, this, dim, biased ? 1 : 0, keepdim ? 1 : 0);
+        return r;
+    }
+
+    public FloatTensor norm(float value, int dim, boolean keepdim) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_norm(r, this, value, dim, keepdim ? 1 : 0);
+        return r;
+    }
+    public FloatTensor renorm(float value, int dim, float maxnorm) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_renorm(r, this, value, dim, maxnorm);
+        return r;
+    }
+    public double dist(FloatTensor that, float value) {
+        return TH.THFloatTensor_dist(this, that, value);
+    }
+
+    // histc
+    // bhistc
+
+    public double meanall() {
+        return TH.THFloatTensor_meanall(this);
+    }
+
+    public double varall(boolean biased) {
+        return TH.THFloatTensor_varall(this, biased ? 1 : 0);
+    }
+    public double stdall(boolean biased) {
+        return TH.THFloatTensor_stdall(this, biased ? 1 : 0);
+    }
+    public double normall(float value) {
+        return TH.THFloatTensor_normall(this, value);
+    }
+
+    public static FloatTensor linspace(float a, float b, long n) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_linspace(r, a, b, n);
+        return r;
+    }
+
+    public static FloatTensor logspace(float a, float b, long n) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_logspace(r, a, b, n);
+        return r;
+    }
+
+    public static FloatTensor rand(Generator generator, LongStorage size) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_rand(r, generator, size);
+        return r;
+    }
+
+    public static FloatTensor randn(Generator generator, LongStorage size) {
+        FloatTensor r = new FloatTensor();
+        TH.THFloatTensor_randn(r, generator, size);
+        return r;
+    }
+
+    // dirichlet_Grad
     // RANDOM
 
 
     // CONV
 
+    public void close() {
+        free();
+    }
 
     public String toString() {
         return desc().getStr();
     }
 }
+

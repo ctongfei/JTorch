@@ -6,7 +6,7 @@ import jtorch.jni.*;
  * Java proxy class for the TH*Storage types.
  * @author Tongfei Chen
  */
-public class JStorage extends THStorage implements WithFlag, AutoCloseable {
+public class JStorage extends THStorage implements WithFlag, OffHeapMemory {
 
     public JStorage() {
         this(TH.THStorage_(new)());
