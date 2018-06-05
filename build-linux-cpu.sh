@@ -38,8 +38,8 @@ cd ..
 
 
 echo "Generating SWIG bindings..."
-mkdir -p cpu/src/main/java/jtorch/cpu
-swig -java -package jtorch.cpu -outdir cpu/src/main/java/jtorch/cpu torch-cpu.i
+mkdir -p cpu/src/main/java/jtorch/cpu/jni
+swig -java -package jtorch.cpu.jni -outdir cpu/src/main/java/jtorch/cpu/jni torch-cpu.i
 
 echo "Compiling SWIG generated JNI wrapper code..."
 

@@ -1,49 +1,53 @@
 ## JTorch: JVM bindings for Torch (PyTorch C/C++ core)
 
+Corresponding PyTorch version: `0.4.0`
+
 🚧 **Ongoing project** 🚧 **Status: Not ready for use** 🚧
 
 |      | Windows | Linux | MacOS |
 |:----:|:-------:|:-----:|:-----:|
-| CPU  |         |   ✓   |   ✓   |
-| CUDA |         |   ✓   |   ✓   |
+| CPU  |         |       |   ✓   |
+| CUDA |         |       |   ✓   |
 
 ### Installation
 
-**Step 1: Build ATen binary.** 
-Clone [PyTorch](https://github.com/pytorch/pytorch), go to the `aten` directory (containing the ATen tensor library) and make from there.
-```sh
-git clone https://github.com/pytorch/pytorch.git
-cd pytorch/aten
-mkdir build
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=/where/you/want # specify your dest directory
-# cmake .. -DNO_CUDA=true  # for CPU only machines
-make install
-```
-You should get `libATen.dylib` at `/usr/local/lib` and also C/C++ include files in `/usr/local/include`.
+**Step 1: Install PyTorch from source.**
+
+Locate the headers (\*.h) and shared libraries (\*.so / \*.dylib / \*.dll)
 
 **Step 2: Build SWIG bindings and publish to local Ivy repository.**
 ```sh
-./build-{mac/linux}-cpu.sh
-./build-{mac/linux}-cuda.sh  # If you want CUDA support
+./build-{mac/linux}.sh
 ```
 You probably need to modify something in the script to make it work.
 
 **[TODO]** Will be refactored into a `Makefile`.
 
+
 **Step 3: Use!**
 ```xml
     <dependency>
       <groupId>me.tongfei</groupId>
-      <artifactId>jtorch-cpu</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>me.tongfei</groupId>
-      <artifactId>jtorch-cuda</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <artifactId>jtorch-java</artifactId>
+      <version>0.1-TH0.4-SNAPSHOT</version>
     </dependency>
 ```
 
-When starting a JVM, add `-Djava.library.path=/usr/local/lib` (or where your `libATen.dylib` is) so that JVM can properly load the binary.
+When starting a JVM, add `-Djava.library.path=/usr/local/lib` (or where your `libATen.dylib` is), 
+or set `$LD_LIBRARY_PATH` to include that directory, so that JVM can properly load native the binary.
+
+### Typemaps
+
+Torch has the following `Storage`/`Tensor` types, which are mapped to the Java corresponding types on the right.
+
+| Torch type      | Element type (C) | Bits | Mapped element type (Java)  | Java type     |
+|-----------------|------------------|------|-----------------------------|---------------|
+|`THHalfTensor`   |`THHalf`          | 16   |`float`                      |`HalfTensor`   |
+|`THFloatTensor`  |`float`           | 32   |`float`                      |`FloatTensor`  |
+|`THDoubleTensor` |`double`          | 64   |`double`                     |`DoubleTensor` |
+|`THByteTensor`   |`uint8_t`         | 8    |`short`                      |`UByteTensor`  |
+|`THCharTensor`   |`int8_t`          | 8    |`byte`                       |`ByteTensor`   |
+|`THShortTensor`  |`int16_t`         | 16   |`short`                      |`ShortTensor`  |
+|`THIntTensor`    |`int32_t`         | 32   |`int`                        |`IntTensor`    |
+|`THLongTensor`   |`int64_t`         | 64   |`long`                       |`LongTensor`   |
+

@@ -40,8 +40,8 @@ cd ..
 
 
 echo "Generates Swig bindings..."
-mkdir -p cuda/src/main/java/jtorch/cuda
-swig -java -package jtorch.cuda -outdir cuda/src/main/java/jtorch/cuda torch-cuda.i
+mkdir -p cuda/src/main/java/jtorch/cuda/jni
+swig -java -package jtorch.cuda.jni -outdir cuda/src/main/java/jtorch/cuda/jni torch-cuda.i
 
 echo "Compile SWIG generated JNI wrapper code..."
 

@@ -30,6 +30,7 @@ for f in $(find . -name \*.h); do
 done
 cd ..
 
+
 echo "Preprocessing C headers..."
 cp torch-cpu.h include-swig
 cd include-swig
@@ -38,11 +39,11 @@ cd ..
 
 
 echo "Generating SWIG bindings..."
-mkdir -p cpu/src/main/java/jtorch/cpu
-swig -java -package jtorch.cpu -outdir cpu/src/main/java/jtorch/cpu torch-cpu.i
+mkdir -p cpu/src/main/java/jtorch/cpu/jni
+swig -java -package jtorch.cpu.jni -outdir cpu/src/main/java/jtorch/cpu/jni torch-cpu.i
+
 
 echo "Compiling SWIG generated JNI wrapper code..."
-
 cc -c torch-cpu_wrap.c \
     -I $JAVA_HOME/include \
     -I $JAVA_HOME/include/darwin \
@@ -50,9 +51,11 @@ cc -c torch-cpu_wrap.c \
     -I /usr/local/include/THNN \
     -I /usr/local/include/THS
 
+
 echo "Building dynamic linking library..."
 mkdir -p cpu/src/main/resources
 cc -dynamiclib -undefined suppress -flat_namespace torch-cpu_wrap.o -o cpu/src/main/resources/libjnitorchcpu.dylib
+
 
 echo "Publishing to local Ivy repository..."
 sbt jniutils/publishLocal cpu/publishLocal
