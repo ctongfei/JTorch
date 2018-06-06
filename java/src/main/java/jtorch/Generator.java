@@ -9,13 +9,13 @@ import java.math.BigInteger;
  * Also includes functions from THRandom.h.
  * @author Tongfei Chen
  */
-public class Generator extends SWIGTYPE_p_THGenerator implements AutoCloseable {
+public class Generator extends SWIGTYPE_p_THGenerator implements MainMemoryNativeObject {
 
     protected Generator(SWIGTYPE_p_THGenerator underlying) {
         super(SWIGTYPE_p_THGenerator.getCPtr(underlying), true);
     }
 
-    protected long cPtr() {
+    public long cPtr() {
         return SWIGTYPE_p_THGenerator.getCPtr(this);
     }
 

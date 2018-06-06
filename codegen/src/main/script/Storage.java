@@ -16,7 +16,7 @@ public class JStorage extends THStorage implements WithFlag, OffHeapMemory {
         super(THStorage.getCPtr(underlying), true);
     }
 
-    protected long cPtr() {
+    public long cPtr() {
         return THStorage.getCPtr(this);
     }
 

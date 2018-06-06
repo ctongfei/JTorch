@@ -10,74 +10,79 @@ import java.math.BigInteger;
  */
 public class Torch {
 
+    /** Frees the given Torch object. */
+    public static void free(NativeObject o) {
+        TH.THFree(new PtrVoid(o.cPtr()));
+    }
+
     //////////////
     // THMath.h //
     //////////////
 
-    public double sigmoid(double value) {
+    public static double sigmoid(double value) {
         return TH.TH_sigmoid(value);
     }
 
-    public double frac(double x) {
+    public static double frac(double x) {
         return TH.TH_frac(x);
     }
 
     /** Inverse square root. */
-    public double rsqrt(double x) {
+    public static double rsqrt(double x) {
         return TH.TH_rsqrt(x);
     }
 
-    public double lerp(double a, double b, double weight) {
+    public static double lerp(double a, double b, double weight) {
         return TH.TH_lerp(a, b, weight);
     }
 
-    public float sigmoidf(float value) {
+    public static float sigmoidf(float value) {
         return TH.TH_sigmoidf(value);
     }
 
-    public float fracf(float x) {
+    public static float fracf(float x) {
         return TH.TH_fracf(x);
     }
 
-    public float rsqrtf(float x) {
+    public static float rsqrtf(float x) {
         return TH.TH_rsqrtf(x);
     }
 
-    public float lerpf(float a, float b, float weight) {
+    public static float lerpf(float a, float b, float weight) {
         return TH.TH_lerpf(a, b, weight);
     }
 
-    public double erfinv(double y) {
+    public static double erfinv(double y) {
         return TH.TH_erfinv(y);
     }
 
-    public double polevl(double x, double[] A) {
+    public static double polevl(double x, double[] A) {
         CDoubleArray a = new CDoubleArray(A.length);
         for (int i = 0; i < A.length; i++)
             a.setitem(i, A[i]);
         return TH.TH_polevl(x, a.cast(), BigInteger.valueOf(A.length));
     }
 
-    public float polevlf(float x, float[] A) {
+    public static float polevlf(float x, float[] A) {
         CFloatArray a = new CFloatArray(A.length);
         for (int i = 0; i < A.length; i++)
             a.setitem(i, A[i]);
         return TH.TH_polevlf(x, a.cast(), BigInteger.valueOf(A.length));
     }
 
-    public double digamma(double x) {
+    public static double digamma(double x) {
         return TH.TH_digamma(x);
     }
 
-    public double digmmaf(float x) {
+    public static double digmmaf(float x) {
         return TH.TH_digammaf(x);
     }
 
-    public double trigamma(double x) {
+    public static double trigamma(double x) {
         return TH.TH_trigamma(x);
     }
 
-    public float trigammaf(float x) {
+    public static float trigammaf(float x) {
         return TH.TH_trigammaf(x);
     }
 
@@ -89,15 +94,15 @@ public class Torch {
     final public static double LogZero = TH.getTHLogZero();
     final public static double LogOne = TH.getTHLogOne();
 
-    double logAdd(double log_a, double log_b) {
+    public static double logAdd(double log_a, double log_b) {
         return TH.THLogAdd(log_a, log_b);
     }
 
-    double logSub(double log_a, double log_b) {
+    public static double logSub(double log_a, double log_b) {
         return TH.THLogSub(log_a, log_b);
     }
 
-    double expMinusApprox(double x) {
+    public static double expMinusApprox(double x) {
         return TH.THExpMinusApprox(x);
     }
 

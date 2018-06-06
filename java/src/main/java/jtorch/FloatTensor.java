@@ -20,7 +20,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, O
         super(THFloatTensor.getCPtr(underlying), true);
     }
 
-    protected long cPtr() {
+    public long cPtr() {
         return THFloatTensor.getCPtr(this);
     }
 

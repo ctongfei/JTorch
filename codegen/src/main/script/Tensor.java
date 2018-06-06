@@ -17,7 +17,7 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, OffHeapMem
         super(THTensor.getCPtr(underlying), true);
     }
 
-    protected long cPtr() {
+    public long cPtr() {
         return THTensor.getCPtr(this);
     }
 
