@@ -6,7 +6,7 @@ import jtorch.jni.*;
  * Wraps around the C void* type.
  * @author Tongfei Chen
  */
-public class PtrVoid extends SWIGTYPE_p_void {
+public class PtrVoid extends SWIGTYPE_p_void implements NativeObject {
 
     protected PtrVoid(SWIGTYPE_p_void underlying) {
         super(SWIGTYPE_p_void.getCPtr(underlying), true);
@@ -20,4 +20,8 @@ public class PtrVoid extends SWIGTYPE_p_void {
         return new PtrVoid(cPtr);
     }
 
+    @Override
+    public long cPtr() {
+        return SWIGTYPE_p_void.getCPtr(this);
+    }
 }

@@ -624,7 +624,7 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         TH.THTensor_(sub)(this, this, value);
     }
 
-    public JTensor addScaled(JType value, JType alpha) {
+    public JTensor add_scaled(JType value, JType alpha) {
         JTensor r = new JTensor();
         TH.THTensor_(add_scaled)(r, this, value, alpha);
         return r;
