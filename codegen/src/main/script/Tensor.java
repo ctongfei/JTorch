@@ -6,7 +6,7 @@ import jtorch.jni.*;
  * Proxy object that wraps around the TH*Tensor C type.
  * @author Tongfei Chen
  */
-public class JTensor extends THTensor implements Cloneable, WithFlag, OffHeapMemory {
+public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemoryNativeObject {
 
     /** Creates an empty tensor. */
     public JTensor() {
@@ -454,23 +454,23 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, OffHeapMem
     // TODO: copyHalf
 
     // MATH
-    public void fill(JType value) {
+    public void fill_(JType value) {
         TH.THTensor_(fill)(this, value);
     }
 
-    public void zero() {
+    public void zero_() {
         TH.THTensor_(zero)(this);
     }
 
-    public void maskedFill(UByteTensor mask, JType value) {
+    public void maskedFill_(UByteTensor mask, JType value) {
         TH.THTensor_(maskedFill)(this, mask, value);
     }
 
-    public void maskedCopy(UByteTensor mask, JTensor src) {
+    public void maskedCopy_(UByteTensor mask, JTensor src) {
         TH.THTensor_(maskedCopy)(this, mask, src);
     }
 
-    public void maskedSelect(JTensor src, UByteTensor mask) {
+    public void maskedSelect_(JTensor src, UByteTensor mask) {
         TH.THTensor_(maskedSelect)(this, src, mask);
     }
 
@@ -552,28 +552,76 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, OffHeapMem
         return TH.THTensor_(prodall)(this);
     }
 
+    /**
+     * Negates this tensor.
+     * y[i...] = -x[i...]
+     */
     public JTensor neg() {
         JTensor r = new JTensor();
         TH.THTensor_(neg)(r, this);
         return r;
     }
 
-    public JTensor cInv() {
+    /**
+     * Negates this tensor in-place.
+     * x[i...] = -x[i...]
+     */
+    public void neg_() {
+        TH.THTensor_(neg)(this, this);
+    }
+
+    /**
+     * Performs elementwise inverse.
+     * y[i...] = 1.0 / x[i...]
+     */
+    public JTensor cinv() {
         JTensor r = new JTensor();
         TH.THTensor_(cinv)(r, this);
         return r;
     }
 
+    /**
+     * Performs elementwise inverse in-place.
+     * x[i...] = 1.0 / x[i...]
+     */
+    public void cinv_() {
+        TH.THTensor_(cinv)(this, this);
+    }
+
+    /**
+     * Adds a scalar.
+     * y[i...] = x[i...] + value
+     */
     public JTensor add(JType value) {
         JTensor r = new JTensor();
         TH.THTensor_(add)(r, this, value);
         return r;
     }
 
+    /**
+     * Adds a scalar in-place.
+     * x[i...] += value
+     */
+    public void add_(JType value) {
+        TH.THTensor_(add)(this, this, value);
+    }
+
+    /**
+     * Subtracts a scalar.
+     * y[i...] = x[i...] - value
+     */
     public JTensor sub(JType value) {
         JTensor r = new JTensor();
         TH.THTensor_(sub)(r, this, value);
         return r;
+    }
+
+    /**
+     * Subtracts a scalar in-place.
+     * x[i...] -= value
+     */
+    public void sub_(JType value) {
+        TH.THTensor_(sub)(this, this, value);
     }
 
     public JTensor addScaled(JType value, JType alpha) {

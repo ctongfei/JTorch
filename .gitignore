@@ -69,3 +69,35 @@ buildNumber.properties
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+.project
+.settings/
+
+include-swig/
+include/
+
+java/src/main/java/jtorch/ByteStorage.java
+java/src/main/java/jtorch/ByteTensor.java
+java/src/main/java/jtorch/ByteVector.java
+java/src/main/java/jtorch/DoubleStorage.java
+java/src/main/java/jtorch/DoubleTensor.java
+java/src/main/java/jtorch/DoubleVector.java
+java/src/main/java/jtorch/FloatStorage.java
+java/src/main/java/jtorch/FloatTensor.java
+java/src/main/java/jtorch/FloatVector.java
+java/src/main/java/jtorch/IntStorage.java
+java/src/main/java/jtorch/IntTensor.java
+java/src/main/java/jtorch/IntVector.java
+java/src/main/java/jtorch/LongStorage.java
+java/src/main/java/jtorch/LongTensor.java
+java/src/main/java/jtorch/LongVector.java
+java/src/main/java/jtorch/ShortStorage.java
+java/src/main/java/jtorch/ShortTensor.java
+java/src/main/java/jtorch/ShortVector.java
+java/src/main/java/jtorch/UByteStorage.java
+java/src/main/java/jtorch/UByteTensor.java
+java/src/main/java/jtorch/UByteVector.java
+java/src/main/java/jtorch/nn/
+
+project/build.properties
+*_wrap.c
+*_wrap.o

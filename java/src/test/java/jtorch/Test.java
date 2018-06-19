@@ -9,8 +9,12 @@ public class Test {
 
     static public void main(String[] args) {
 
-        THFloatTensor a = TH.THFloatTensor_new();
-        TH.THFloatTensor_eye(a, 3, 3);
+        FloatTensor a = FloatTensor.eye(3, 3);
+        FloatTensor b = a.neg();
+        a.neg_();
+
+        FloatTensor c = FloatTensor.ones();
+
 
         System.out.print(3);
 

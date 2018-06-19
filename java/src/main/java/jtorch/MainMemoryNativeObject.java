@@ -8,4 +8,6 @@ public interface MainMemoryNativeObject extends NativeObject {
 
     long cPtr();
 
+    //long sizeInMemory();
+
 }

@@ -9,7 +9,7 @@ import jtorch.jni.*;
  * Proxy object that wraps around the TH*Tensor C type.
  * @author Tongfei Chen
  */
-public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, OffHeapMemory {
+public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, MainMemoryNativeObject {
 
     /** Creates an empty tensor. */
     public FloatTensor() {
@@ -457,23 +457,23 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, O
     // TODO: copyHalf
 
     // MATH
-    public void fill(float value) {
+    public void fill_(float value) {
         TH.THFloatTensor_fill(this, value);
     }
 
-    public void zero() {
+    public void zero_() {
         TH.THFloatTensor_zero(this);
     }
 
-    public void maskedFill(UByteTensor mask, float value) {
+    public void maskedFill_(UByteTensor mask, float value) {
         TH.THFloatTensor_maskedFill(this, mask, value);
     }
 
-    public void maskedCopy(UByteTensor mask, FloatTensor src) {
+    public void maskedCopy_(UByteTensor mask, FloatTensor src) {
         TH.THFloatTensor_maskedCopy(this, mask, src);
     }
 
-    public void maskedSelect(FloatTensor src, UByteTensor mask) {
+    public void maskedSelect_(FloatTensor src, UByteTensor mask) {
         TH.THFloatTensor_maskedSelect(this, src, mask);
     }
 
@@ -555,28 +555,76 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, O
         return TH.THFloatTensor_prodall(this);
     }
 
+    /**
+     * Negates this tensor.
+     * y[i...] = -x[i...]
+     */
     public FloatTensor neg() {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_neg(r, this);
         return r;
     }
 
-    public FloatTensor cInv() {
+    /**
+     * Negates this tensor in-place.
+     * x[i...] = -x[i...]
+     */
+    public void neg_() {
+        TH.THFloatTensor_neg(this, this);
+    }
+
+    /**
+     * Performs elementwise inverse.
+     * y[i...] = 1.0 / x[i...]
+     */
+    public FloatTensor cinv() {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_cinv(r, this);
         return r;
     }
 
+    /**
+     * Performs elementwise inverse in-place.
+     * x[i...] = 1.0 / x[i...]
+     */
+    public void cinv_() {
+        TH.THFloatTensor_cinv(this, this);
+    }
+
+    /**
+     * Adds a scalar.
+     * y[i...] = x[i...] + value
+     */
     public FloatTensor add(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_add(r, this, value);
         return r;
     }
 
+    /**
+     * Adds a scalar in-place.
+     * x[i...] += value
+     */
+    public void add_(float value) {
+        TH.THFloatTensor_add(this, this, value);
+    }
+
+    /**
+     * Subtracts a scalar.
+     * y[i...] = x[i...] - value
+     */
     public FloatTensor sub(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_sub(r, this, value);
         return r;
+    }
+
+    /**
+     * Subtracts a scalar in-place.
+     * x[i...] -= value
+     */
+    public void sub_(float value) {
+        TH.THFloatTensor_sub(this, this, value);
     }
 
     public FloatTensor addScaled(float value, float alpha) {
