@@ -49,6 +49,10 @@ lazy val java = (project in file("java")).settings(commonSettings: _*).dependsOn
   name := "jtorch-java"
 )
 
+lazy val javaCuda = (project in file("java-cuda")).settings(commonSettings: _*).dependsOn(java).settings(
+  name := "jtorch-java-cuda"
+)
+
 lazy val codegen = (project in file("codegen")).settings(commonSettings: _*).settings(
   name := "jtorch-codegen",
   crossPaths := true,

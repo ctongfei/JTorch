@@ -58,8 +58,13 @@ object Generate extends App {
   val primitiveTypeMap = Map(
     "void" -> "void",
     "char" -> "byte",
+    "int8_t" -> "byte",
+    "uint8_t" -> "short", //TODO: ?
     "char *" -> "String",
+    "short" -> "short",
+    "int16_t" -> "short",
     "int" -> "int",
+    "int32_t" -> "int",
     "long" -> "long",
     "int64_t" -> "long",
     "size_t" -> "long",
