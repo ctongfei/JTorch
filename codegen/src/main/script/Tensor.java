@@ -642,10 +642,18 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         return r;
     }
 
+    public void mul_(JType value) {
+        TH.THTensor_(mul)(this, this, value);
+    }
+
     public JTensor div(JType value) {
         JTensor r = new JTensor();
         TH.THTensor_(div)(r, this, value);
         return r;
+    }
+
+    public void div_(JType value) {
+        TH.THTensor_(div)(this, this, value);
     }
 
     public JTensor lshift(JType value) {
@@ -654,10 +662,18 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         return r;
     }
 
+    public void lshift_(JType value) {
+        TH.THTensor_(lshift)(this, this, value);
+    }
+
     public JTensor rshift(JType value) {
         JTensor r = new JTensor();
         TH.THTensor_(rshift)(r, this, value);
         return r;
+    }
+
+    public void rshift_(JType value) {
+        TH.THTensor_(rshift)(this, this, value);
     }
 
     public JTensor fmod(JType value) {
