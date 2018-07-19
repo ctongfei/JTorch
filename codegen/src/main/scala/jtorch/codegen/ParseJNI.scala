@@ -6,13 +6,14 @@ import scala.io._
  * Parses SWIG JNI output.
  * @author Tongfei Chen
  */
-object ParseJNI extends App {
+object ParseJNI {
 
   val rxDef = "public static (\\w*) (\\w*)\\((.*)\\) \\{".r
   val rxArg = "([\\w\\.]*) (\\w*)".r
 
-  def parse(s: String): Option[JStaticMethod] = s match {
-    case rxDef(returnType, name, argsDef) => Some(JStaticMethod(
+  def parse(s: String): Option[JMethodSignature] = s match {
+    case rxDef(returnType, name, argsDef) => Some(JMethodSignature(
+      isStatic = true,
       returnType,
       name,
       argsDef split ", " filter { _ != "" } map {

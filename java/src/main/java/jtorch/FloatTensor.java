@@ -627,7 +627,7 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, M
         TH.THFloatTensor_sub(this, this, value);
     }
 
-    public FloatTensor addScaled(float value, float alpha) {
+    public FloatTensor add_scaled(float value, float alpha) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_add_scaled(r, this, value, alpha);
         return r;
@@ -645,10 +645,18 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, M
         return r;
     }
 
+    public void mul_(float value) {
+        TH.THFloatTensor_mul(this, this, value);
+    }
+
     public FloatTensor div(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_div(r, this, value);
         return r;
+    }
+
+    public void div_(float value) {
+        TH.THFloatTensor_div(this, this, value);
     }
 
     public FloatTensor lshift(float value) {
@@ -657,10 +665,18 @@ public class FloatTensor extends THFloatTensor implements Cloneable, WithFlag, M
         return r;
     }
 
+    public void lshift_(float value) {
+        TH.THFloatTensor_lshift(this, this, value);
+    }
+
     public FloatTensor rshift(float value) {
         FloatTensor r = new FloatTensor();
         TH.THFloatTensor_rshift(r, this, value);
         return r;
+    }
+
+    public void rshift_(float value) {
+        TH.THFloatTensor_rshift(this, this, value);
     }
 
     public FloatTensor fmod(float value) {

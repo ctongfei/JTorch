@@ -10,10 +10,12 @@ public class JStorage extends THStorage implements WithFlag, MainMemoryNativeObj
 
     public JStorage() {
         this(TH.THStorage_(new)());
+        MainMemoryManager.INSTANCE.register(this, 0);
     }
 
     protected JStorage(THStorage underlying) {
         super(THStorage.getCPtr(underlying), true);
+        MainMemoryManager.INSTANCE.register(this, this.size() * JStorage.elementSize());
     }
 
     public long cPtr() {
@@ -125,6 +127,7 @@ public class JStorage extends THStorage implements WithFlag, MainMemoryNativeObj
     /** Frees the memory allocated with this object. */
     public void free() {
         TH.THStorage_(free)(this);
+        MainMemoryManager.INSTANCE.unregister(this);
     }
 
     public void resize(long size) {
