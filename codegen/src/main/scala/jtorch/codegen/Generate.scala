@@ -1,7 +1,5 @@
 package jtorch.codegen
 
-import jtorch.codegen.classes._
-
 import scala.collection._
 
 /**
@@ -19,41 +17,38 @@ object Generate extends App {
 
   val classes = mutable.HashMap[String, JClass]()
 
+  classes += "Torch" -> JClass(
+    name = "Torch",
+    packageName = "jtorch",
+    baseClass = "",
+    interfaces = mutable.ArrayBuffer(),
+    doc = "",
+    methods = mutable.ArrayBuffer()
+  )
+
   for (d <- defs) {
     d.name match {
-      case sm"${jniClass}_${n}" =>
-        val tm = TypeMap.get(jniClass)
-        if (!(classes contains jniClass))
-          classes += jniClass -> JClass(
+      case sm"${jniStructName}_${name}" =>
+        val tm = TypeMap.get(jniStructName)
+        if (!(classes contains jniStructName))
+          classes += jniStructName -> JClass(
             name = tm.javaType,
             packageName = "jtorch",
             baseClass = tm.jniType,
-            interfaces = mutable.ArraySeq(),
+            interfaces = mutable.ArrayBuffer(),
             doc = "",
-            methods = mutable.ArraySeq()
+            methods = mutable.ArrayBuffer()
           )
+        val cls = classes(jniStructName)
+        cls.methods += CodeGenerator.method(d)
 
-      case sm"TH$n" =>
 
-    }
-  }
-
-  val groups = defs groupBy {
-    case d if !d.name.contains("_") => ""
-    case d => d.name.substring(0, d.name.indexOf("_"))
-  }
-
-  for ((k, defs) <- groups) {
-    val ks = tokenize(k)
-    if (ks.size == 0) {
-
-    }
-    else if (ks(0) != "C" && ks(0) != "Cuda" && ks.last == "Storage")
-      Storage.generate(k, defs)
-    else {
+      case sm"TH$name" =>
 
     }
   }
+
+
 
   val bp = 0
 

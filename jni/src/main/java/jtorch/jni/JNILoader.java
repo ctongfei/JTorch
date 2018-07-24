@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package jtorch.jniutils;
+package jtorch.jni;
 
 import java.io.*;
 import java.net.*;
@@ -72,11 +72,9 @@ public class JNILoader {
         URL url = getLibraryUrl(libraryName);
         String fileName = new File(url.getPath()).getName();
         File lib = new File(tempDir, fileName);
+
         try (InputStream is = getLibraryUrl(libraryName).openStream()) {
             Files.copy(is, lib.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        }
-        catch (IOException e) {
-            throw e;
         }
 
         System.load(lib.getAbsolutePath()); // JVM requires absolute path

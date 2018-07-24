@@ -46,7 +46,7 @@ intptr_t
     static {
         try {
             System.loadLibrary("ATen");
-            jtorch.jniutils.JNILoader.loadLibraryFromJar("jnitorch");
+            jtorch.jni.JNILoader.loadLibraryFromJar("jnitorch");
         }
         catch (Exception e) {
             e.printStackTrace();

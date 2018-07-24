@@ -1,6 +1,6 @@
 package jtorch.codegen
 
-import scala.collection._
+import scala.collection.{mutable, _}
 
 /**
  * Java method signatures.
@@ -38,7 +38,14 @@ object JClass {
       |// DO NOT EDIT.""".stripMargin
 }
 
-case class JClass(name: String, baseClass: String, interfaces: mutable.Seq[String], packageName: String, doc: String, methods: mutable.Seq[JMethod]) {
+case class JClass(
+                   name: String,
+                   baseClass: String,
+                   interfaces: mutable.ArrayBuffer[String],
+                   packageName: String,
+                   doc: String,
+                   methods: mutable.ArrayBuffer[JMethod]
+                 ) {
   override def toString =
     s"""
        |${JClass.header}
