@@ -76,5 +76,5 @@ mkdir -p jni/src/main/resources
 cc -dynamiclib -undefined suppress -flat_namespace torch_wrap.o -o jni/src/main/resources/libjnitorch.dylib
 
 # echo "Publishing to local Ivy repository..."
-# sbt jniutils/publishLocal jni/publishLocal java/publishLocal javaCuda/publishLocal
+# sbt jni/publishLocal java/publishLocal javaCuda/publishLocal
 

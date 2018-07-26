@@ -8,11 +8,11 @@ lazy val commonSettings = Seq(
 
   publishMavenStyle := true,
   publishTo := {
-    val nexus = "https://oss.sonatype.org/"
+    val sonatype = "https://oss.sonatype.org/"
     if (isSnapshot.value)
-      Some("snapshots" at nexus + "content/repositories/snapshots")
+      Some("snapshots" at sonatype + "content/repositories/snapshots")
     else
-      Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+      Some("releases"  at sonatype + "service/local/staging/deploy/maven2")
   },
 
   pomExtra :=
@@ -37,11 +37,7 @@ lazy val commonSettings = Seq(
       </developers>
 )
 
-lazy val jniutils = (project in file("jniutils")).settings(commonSettings: _*).settings(
-  name := "jtorch-jniutils"
-)
-
-lazy val jni = (project in file("jni")).settings(commonSettings: _*).dependsOn(jniutils).settings(
+lazy val jni = (project in file("jni")).settings(commonSettings: _*).settings(
   name := "jtorch-jni"
 )
 
@@ -57,5 +53,5 @@ lazy val codegen = (project in file("codegen")).settings(commonSettings: _*).set
   name := "jtorch-codegen",
   crossPaths := true,
   autoScalaLibrary := true,
-  libraryDependencies += "com.lihaoyi" %% "fastparse" % "1.0.0"
+  skip in publish := true  // Do not publish this!
 )

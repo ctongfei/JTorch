@@ -22,33 +22,29 @@ public class Torch {
     public static double sigmoid(double value) {
         return TH.TH_sigmoid(value);
     }
+    public static float sigmoid(float value) {
+        return TH.TH_sigmoidf(value);
+    }
 
     public static double frac(double x) {
         return TH.TH_frac(x);
+    }
+    public static float frac(float x) {
+        return TH.TH_fracf(x);
     }
 
     /** Inverse square root. */
     public static double rsqrt(double x) {
         return TH.TH_rsqrt(x);
     }
+    public static float rsqrt(float x) {
+        return TH.TH_rsqrtf(x);
+    }
 
     public static double lerp(double a, double b, double weight) {
         return TH.TH_lerp(a, b, weight);
     }
-
-    public static float sigmoidf(float value) {
-        return TH.TH_sigmoidf(value);
-    }
-
-    public static float fracf(float x) {
-        return TH.TH_fracf(x);
-    }
-
-    public static float rsqrtf(float x) {
-        return TH.TH_rsqrtf(x);
-    }
-
-    public static float lerpf(float a, float b, float weight) {
+    public static float lerp(float a, float b, float weight) {
         return TH.TH_lerpf(a, b, weight);
     }
 
@@ -63,7 +59,7 @@ public class Torch {
         return TH.TH_polevl(x, a.cast(), BigInteger.valueOf(A.length));
     }
 
-    public static float polevlf(float x, float[] A) {
+    public static float polevl(float x, float[] A) {
         CFloatArray a = new CFloatArray(A.length);
         for (int i = 0; i < A.length; i++)
             a.setitem(i, A[i]);
@@ -74,7 +70,7 @@ public class Torch {
         return TH.TH_digamma(x);
     }
 
-    public static double digmmaf(float x) {
+    public static double digmma(float x) {
         return TH.TH_digammaf(x);
     }
 
@@ -82,7 +78,7 @@ public class Torch {
         return TH.TH_trigamma(x);
     }
 
-    public static float trigammaf(float x) {
+    public static float trigamma(float x) {
         return TH.TH_trigammaf(x);
     }
 

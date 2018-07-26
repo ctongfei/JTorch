@@ -18,6 +18,10 @@ public class Test {
 
         System.out.print(3);
 
+        for (int i = 0; i < 1000; i += 1) {
+            FloatTensor x = FloatTensor.eye(1000, 1000);
+        }
+
     }
 
 }

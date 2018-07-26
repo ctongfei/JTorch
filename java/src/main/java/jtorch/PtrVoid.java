@@ -24,4 +24,9 @@ public class PtrVoid extends SWIGTYPE_p_void implements NativeObject {
     public long cPtr() {
         return SWIGTYPE_p_void.getCPtr(this);
     }
+
+    @Override
+    public void close() throws Exception {
+        Torch.free(this);
+    }
 }

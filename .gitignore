@@ -101,3 +101,4 @@ java/src/main/java/jtorch/nn/
 project/build.properties
 *_wrap.c
 *_wrap.o
+/java/src/main/java/jtorch/Storage.java

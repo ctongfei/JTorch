@@ -70,7 +70,7 @@ object GenerateTHNN extends App {
   val buf = mutable.ArrayBuffer[String]()
   for (l <- Source.fromFile(thnnHeader).getLines().filter(l => !l.startsWith("#") && !l.startsWith("//") && l.trim() != "")) {
     if (l startsWith "TH_API") {
-      if (buf.length != 0) functions += parseAPI(buf)
+      if (buf.nonEmpty) functions += parseAPI(buf)
       buf.clear()
       buf += l
     }

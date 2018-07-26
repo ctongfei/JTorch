@@ -36,7 +36,21 @@ You probably need to modify something in the script to make it work.
 When starting a JVM, add `-Djava.library.path=/usr/local/lib` (or where your `libATen.dylib` is), 
 or set `$LD_LIBRARY_PATH` to include that directory, so that JVM can properly load native the binary.
 
-### Typemaps
+### Package mappings
+
+Torch has several C packages, to which each is mapped to the following Java package:
+
+| Torch package | Mapped Java package |
+|---------------|---------------------|
+|`TH`           |`jtorch`             |
+|`THNN`         |`jtorch.nn`          |
+|`THS`          |`jtorch.sparse`      |
+|`THC`          |`jtorch.cuda`        |
+|`THCUNN`       |`jtorch.cuda.nn`     |
+|`THCS`         |`jtorch.cuda.sparse` |
+
+
+### Type mappings
 
 Torch has the following `Storage`/`Tensor` types, which are mapped to the Java corresponding types on the right.
 

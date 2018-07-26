@@ -254,7 +254,17 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
     public void setStorage(JStorage storage, long storageOffset, LongStorage size, LongStorage stride) {
         TH.THTensor_(setStorage)(this, storage, storageOffset, size, stride);
     }
-
+    
+    public void setStorageNd(JStorage storage, long storageOffset, int nDimension, long[] size, long[] stride) {
+        CInt64Array sizeArr = new CInt64Array(size.length);
+        CInt64Array strideArr = new CInt64Array(stride.length);
+        for (int i = 0; i < size.length; i++) {
+            sizeArr.setitem(i, size[i]);
+            strideArr.setitem(i, stride[i]);
+        }
+        TH.THTensor_(setStorageNd)(this, storage, storageOffset, nDimension, sizeArr.cast(), strideArr.cast());
+    }
+    
     public void setStorage1d(JStorage storage, long storageOffset, long size0, long stride0) {
         TH.THTensor_(setStorage1d)(this, storage, storageOffset, size0, stride0);
     }
@@ -415,6 +425,84 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
                 TH.THTensor_(sizeDesc)(this)
         );
     }
+
+    // RANDOM
+    public void random_(Generator gen) {
+        TH.THTensor_(random)(this, gen);
+    }
+
+    public void clampedRandom_(Generator gen, long min, long max) {
+        TH.THTensor_(clampedRandom)(this, gen, min, max);
+    }
+
+    public void cappedRandom_(Generator gen, long max) {
+        TH.THTensor_(cappedRandom)(this, gen, max);
+    }
+
+    public void geometric_(Generator gen, double p) {
+        TH.THTensor_(geometric)(this, gen, p);
+    }
+
+    public void bernoulli_(Generator gen, double p) {
+        TH.THTensor_(bernoulli)(this, gen, p);
+    }
+
+    public void bernoulliFloatTensor_(Generator gen, FloatTensor p) {
+        TH.THTensor_(bernoulli_FloatTensor)(this, gen, p);
+    }
+
+    public void bernoulliDoubleTensor_(Generator gen, DoubleTensor p) {
+        TH.THTensor_(bernoulli_DoubleTensor)(this, gen, p);
+    }
+
+#if defined(TH_REAL_IS_FLOAT) || defined(TH_REAL_IS_DOUBLE)
+    
+    public void bernoulliTensor_(Generator gen, THTensor p) {
+        TH.THTensor_(bernoulli_Tensor)(this, gen, p);
+    }
+
+    public void uniform_(Generator gen, double a, double b) {
+        TH.THTensor_(uniform)(this, gen, a, b);
+    }
+
+    public void normal_(Generator gen, double mean, double stddev) {
+        TH.THTensor_(normal)(this, gen, mean, stddev);
+    }
+
+    public void normalMeans_(Generator gen, THTensor means, double stddev) {
+        TH.THTensor_(normal_means)(this, gen, means, stddev);
+    }
+
+    public void normalStddevs_(Generator gen, double mean, THTensor stddevs) {
+        TH.THTensor_(normal_stddevs)(this, gen, mean, stddevs);
+    }
+
+    public void normalMeansStddevs_(Generator gen, THTensor means, THTensor stddevs) {
+        TH.THTensor_(normal_means_stddevs)(this, gen, means, stddevs);
+    }
+
+    public void exponential_(Generator gen, double lambda) {
+        TH.THTensor_(exponential)(this, gen, lambda);
+    }
+
+    public void standardGamma_(Generator gen, THTensor alpha) {
+        TH.THTensor_(standard_gamma)(this, gen, alpha);
+    }
+
+    public void cauchy_(Generator gen, double median, double sigma) {
+        TH.THTensor_(cauchy)(this, gen, median, sigma);
+    }
+
+    public void logNormal_(Generator gen, double mean, double stddev) {
+        TH.THTensor_(logNormal)(this, gen, mean, stddev);
+    }
+    //TODO: multinomial/multinomialAliasSetup/multinomialAliasDraw
+#endif    
+
+#if defined(TH_REAL_IS_BYTE)
+    //TODO: getRNGState / setRNGState
+        
+#endif        
 
     // CONV
 
@@ -636,22 +724,38 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         return r;
     }
 
+    /**
+     * Scales a tensor by the specific value.
+     * y[i...] = x[i...] * value
+     */
     public JTensor mul(JType value) {
         JTensor r = new JTensor();
         TH.THTensor_(mul)(r, this, value);
         return r;
     }
 
+    /**
+     * Scales a tensor by the specific value in-place.
+     * x[i...] *= value
+     */
     public void mul_(JType value) {
         TH.THTensor_(mul)(this, this, value);
     }
 
+    /**
+     * Scales a tensor by the inverse of the specific value.
+     * y[i...] = x[i...] / value
+     */
     public JTensor div(JType value) {
         JTensor r = new JTensor();
         TH.THTensor_(div)(r, this, value);
         return r;
     }
 
+    /**
+     * Scales a tensor by the inverse of the specific value in-place.
+     * x[i...] /= value
+     */
     public void div_(JType value) {
         TH.THTensor_(div)(this, this, value);
     }
@@ -688,10 +792,17 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         return r;
     }
 
+    /**
+     * Clamps the elements of this tensor between the specified range.
+     */
     public JTensor clamp(JType minValue, JType maxValue) {
         JTensor r = new JTensor();
         TH.THTensor_(clamp)(r, this, minValue, maxValue);
         return r;
+    }
+
+    public void clamp_(JType minValue, JType maxValue) {
+        TH.THTensor_(clamp)(this, this, minValue, maxValue);
     }
 
     public JTensor bitand(JType value) {
@@ -718,10 +829,18 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         return z;
     }
 
+    public void cadd_(JType a, JTensor y) {
+        TH.THTensor_(cadd)(this, this, a, y);
+    }
+
     public JTensor csub(JType a, JTensor y) {
         JTensor z = new JTensor();
         TH.THTensor_(csub)(z, this, a, y);
         return z;
+    }
+
+    public void csub_(JType a, JTensor y) {
+        TH.THTensor_(csub)(this, this, a, y);
     }
 
     public JTensor cmul(JTensor y) {
@@ -730,16 +849,28 @@ public class JTensor extends THTensor implements Cloneable, WithFlag, MainMemory
         return z;
     }
 
+    public void cmul_(JTensor y) {
+        TH.THTensor_(cmul)(this, this, y);
+    }
+
     public JTensor cpow(JTensor y) {
         JTensor z = new JTensor();
         TH.THTensor_(cpow)(z, this, y);
         return z;
     }
 
+    public void cpow_(JTensor y) {
+        TH.THTensor_(cpow)(this, this, y);
+    }
+
     public JTensor cdiv(JTensor y) {
         JTensor z = new JTensor();
         TH.THTensor_(cdiv)(z, this, y);
         return z;
+    }
+
+    public void cdiv_(JTensor y) {
+        TH.THTensor_(cdiv)(this, this, y);
     }
 
     public JTensor clshift(JTensor y) {

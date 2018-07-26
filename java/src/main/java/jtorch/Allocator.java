@@ -6,7 +6,7 @@ import jtorch.jni.*;
  * Proxy class for the Torch Allocator type.
  * @author Tongfei Chen
  */
-public class Allocator extends THAllocator implements NativeObject {
+public class Allocator extends THAllocator implements MainMemoryNativeObject {
 
     protected Allocator(THAllocator underlying) {
         super(THAllocator.getCPtr(underlying), true);
@@ -28,5 +28,7 @@ public class Allocator extends THAllocator implements NativeObject {
         return new Allocator(TH.getTHRefcountedMapAllocator());
     }
 
+    public void close() {
+        Torch.free(this);
+    }
 }
-
