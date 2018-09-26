@@ -1,3 +1,5 @@
+**Future development of this binding has been moved to `nexus-torch` (https://github.com/ctongfei/nexus/tree/master/torch), serving as a computation backend of `nexus`, a typesafe deep learning engine.**
+
 ## JTorch: JVM bindings for Torch (PyTorch C/C++ core)
 
 Corresponding PyTorch version: `0.4.0`
